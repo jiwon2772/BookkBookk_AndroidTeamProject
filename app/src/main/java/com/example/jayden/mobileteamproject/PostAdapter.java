@@ -53,6 +53,11 @@ public class PostAdapter extends BaseAdapter {
         return position;
     }
 
+    public void updateProfile(ImageView first, ImageView second, Bitmap[] bitmap) {
+        first.setImageBitmap(bitmap[0]);
+        second.setImageBitmap(bitmap[1]);
+    }
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         if(convertView == null){
@@ -60,21 +65,24 @@ public class PostAdapter extends BaseAdapter {
             res = R.layout.post_layout;
             convertView = mInflater.inflate(res, parent, false);
         }
-        BookImage book = (BookImage)convertView.findViewById(R.id.bookimage);
+
+       // BookImage book  = (BookImage)convertView.findViewById(R.id.bookimage);   // custom view를 사용하는 경우
+        ImageView book = (ImageView)convertView.findViewById(R.id.bookimage);
         ImageView profile  = (ImageView)convertView.findViewById(R.id.profile);
         TextView user = (TextView)convertView.findViewById(R.id.user);
         TextView time = (TextView)convertView.findViewById(R.id.time);
         TextView text = (TextView)convertView.findViewById(R.id.text);
         //LinearLayout layout_view =  (LinearLayout)convertView.findViewById(R.id.view);
 
-        book.setImageAddress(arr.get(position).bookUrl);// 책 이미지를 각 리스트뷰에 연결해줌
+        //book.setImageAddress(arr.get(position).bookUrl);// 책 이미지를 각 리스트뷰에 연결해줌
        // BookImage.ImageLoaderTask bookTesk = new BookImage.ImageLoaderTask(book,)
         //int resId=  m_activity.getResources().getIdentifier(arr.get(position).profileUrl, "drawable", m_activity.getPackageName());
         // setting Item adapter
 
-        ImageLoaderTask task = new ImageLoaderTask(profile,arr.get(position).profileUrl);
+        ImageLoaderTask task = new ImageLoaderTask(profile,book,arr.get(position).profileUrl,arr.get(position).bookUrl);
         task.execute();
-        user.setText(arr.get(position).userID);         // 유저아이디를 각 리스트뷰에 연결해줌
+
+        user.setText(arr.get(position).nickname);         // 유저아이디를 각 리스트뷰에 연결해줌
         time.setText(arr.get(position).time);
         text.setText(arr.get(position).text);
 //        layout_view.setOnClickListener(new View.OnClickListener() {
@@ -82,36 +90,43 @@ public class PostAdapter extends BaseAdapter {
 //
 //            }
 //        });
+       // notifyDataSetChanged();
         return convertView;
     }
-    public class ImageLoaderTask extends AsyncTask<Void, Void, Bitmap> {
+    public class ImageLoaderTask extends AsyncTask<Void, Void, Bitmap[]> {
 
         /** The target image view to load an image */
-        private ImageView imageView;
+        private ImageView profileView;
+        private ImageView bookView;
 
         /** The address where an image is stored. */
-        private String imageAddress;
+        private String profileAddress;
+        private String bookAddress;
 
-        public ImageLoaderTask(ImageView imageView, String imageAddress) {
-            this.imageView = imageView;
-            this.imageAddress = imageAddress;
+        public ImageLoaderTask(ImageView firstView, ImageView secondView, String firstAddress, String secondAddress) {
+            this.profileView = firstView;
+            this.bookView = secondView;
+            this.profileAddress = firstAddress;
+            this.bookAddress = secondAddress;
         }
 
         @Override
-        protected Bitmap doInBackground(Void... params) {
-            Bitmap bitmap = null;
+        protected Bitmap[] doInBackground(Void... params) {
+            Bitmap[] bitmap = new Bitmap[2];
             try {
-                InputStream is = new java.net.URL(this.imageAddress).openStream();
-                bitmap = BitmapFactory.decodeStream(is);
+                InputStream is = new java.net.URL(this.profileAddress).openStream();
+                bitmap[0] = BitmapFactory.decodeStream(is);
+                is = new java.net.URL(this.bookAddress).openStream();
+                bitmap[1] = BitmapFactory.decodeStream(is);
             } catch (IOException e) {
-                Log.e("ImageLoaderTask", "Cannot load image from " + this.imageAddress);
+                Log.e("ImageLoaderTask", "Cannot load image from " + this.profileAddress);
             }
             return bitmap;
         }
 
         @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            this.imageView.setImageBitmap(bitmap);
+        protected void onPostExecute(Bitmap[] bitmap) {
+            updateProfile(profileView,bookView,bitmap);
         }
     }
 }

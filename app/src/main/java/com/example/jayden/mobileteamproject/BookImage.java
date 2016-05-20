@@ -41,12 +41,17 @@ public class BookImage extends ImageView {
         new ImageLoaderTask(this, add).execute();
     }
 
+    public void setItsBitmap(Bitmap bitmap) {
+        itsBitmap = bitmap;
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         if (itsBitmap == null) {
         } else {
             canvas.drawColor(Color.WHITE);
             canvas.drawBitmap(itsBitmap,new Rect(0,0,itsBitmap.getWidth(),itsBitmap.getHeight()), new Rect(20,20,itsWidth-20,itsHeight-20), null);
+            itsBitmap = null;
         }
     }
 
