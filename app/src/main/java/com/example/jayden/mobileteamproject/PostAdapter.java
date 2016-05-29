@@ -60,46 +60,54 @@ public class PostAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        if(convertView == null){
+        if (convertView == null) {
             int res = 0;
             res = R.layout.post_layout;
             convertView = mInflater.inflate(res, parent, false);
         }
 
-       // BookImage book  = (BookImage)convertView.findViewById(R.id.bookimage);   // custom view를 사용하는 경우
-        ImageView book = (ImageView)convertView.findViewById(R.id.bookimage);
-        ImageView profile  = (ImageView)convertView.findViewById(R.id.profile);
-        TextView user = (TextView)convertView.findViewById(R.id.user);
-        TextView time = (TextView)convertView.findViewById(R.id.time);
-        TextView text = (TextView)convertView.findViewById(R.id.text);
+        // BookImage book  = (BookImage)convertView.findViewById(R.id.bookimage);   // custom view를 사용하는 경우
+        ImageView book = (ImageView) convertView.findViewById(R.id.bookimage);
+        ImageView profile = (ImageView) convertView.findViewById(R.id.profile);
+        TextView user = (TextView) convertView.findViewById(R.id.user);
+        TextView time = (TextView) convertView.findViewById(R.id.time);
+        TextView text = (TextView) convertView.findViewById(R.id.text);
         //LinearLayout layout_view =  (LinearLayout)convertView.findViewById(R.id.view);
 
         //book.setImageAddress(arr.get(position).bookUrl);// 책 이미지를 각 리스트뷰에 연결해줌
-       // BookImage.ImageLoaderTask bookTesk = new BookImage.ImageLoaderTask(book,)
+        // BookImage.ImageLoaderTask bookTesk = new BookImage.ImageLoaderTask(book,)
         //int resId=  m_activity.getResources().getIdentifier(arr.get(position).profileUrl, "drawable", m_activity.getPackageName());
         // setting Item adapter
 
-        ImageLoaderTask task = new ImageLoaderTask(profile,book,arr.get(position).profileUrl,arr.get(position).bookUrl);
-        task.execute();
+        //ImageLoaderTask task = new ImageLoaderTask(profile, book, arr.get(position).profileUrl, arr.get(position).bookUrl);
+        //task.execute();
 
         user.setText(arr.get(position).nickname);         // 유저아이디를 각 리스트뷰에 연결해줌
         time.setText(arr.get(position).time);
         text.setText(arr.get(position).text);
+        profile.setImageBitmap(arr.get(position).bitmap[0]);
+        book.setImageBitmap(arr.get(position).bitmap[1]);
+
 //        layout_view.setOnClickListener(new View.OnClickListener() {
 //            public void onClick(View v) {
 //
 //            }
 //        });
-       // notifyDataSetChanged();
+        // notifyDataSetChanged();
         return convertView;
     }
+
     public class ImageLoaderTask extends AsyncTask<Void, Void, Bitmap[]> {
 
-        /** The target image view to load an image */
+        /**
+         * The target image view to load an image
+         */
         private ImageView profileView;
         private ImageView bookView;
 
-        /** The address where an image is stored. */
+        /**
+         * The address where an image is stored.
+         */
         private String profileAddress;
         private String bookAddress;
 
@@ -126,7 +134,7 @@ public class PostAdapter extends BaseAdapter {
 
         @Override
         protected void onPostExecute(Bitmap[] bitmap) {
-            updateProfile(profileView,bookView,bitmap);
+            updateProfile(profileView, bookView, bitmap);
         }
     }
 }

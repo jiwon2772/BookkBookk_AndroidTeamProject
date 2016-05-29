@@ -3,7 +3,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#aeaeae">
+    android:background="@drawable/wall1"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/menu"
+            android:background="@drawable/menu1"
+            android:layout_gravity="center_vertical" />
+
+        <EditText
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText"
+            android:layout_gravity="center_vertical"
+            android:focusable="false" />
+
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/searchButton"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/search3"
+            android:allowUndo="false" />
+
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/write"
+            android:background="@drawable/write"
+            android:layout_gravity="center_vertical" />
+    </LinearLayout>
 
     <ListView
         android:id="@+id/postlist"
