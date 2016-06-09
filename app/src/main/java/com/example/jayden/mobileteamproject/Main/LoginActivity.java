@@ -1,4 +1,4 @@
-package com.example.jayden.mobileteamproject;
+package com.example.jayden.mobileteamproject.Main;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,12 +7,10 @@ import android.os.Bundle;
 import com.example.jayden.mobileteamproject.R;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
-import com.kakao.usermgmt.UserManagement;
-import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
 
-import com.example.jayden.mobileteamproject.KakaoSignupActivity;
+import com.example.jayden.mobileteamproject.Kakao.KakaoSignupActivity;
 
 public class LoginActivity extends AppCompatActivity{
 
@@ -57,7 +55,7 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     protected void redirectSignupActivity() {       //세션 연결 성공 시 SignupActivity로 넘김
-        final Intent intent = new Intent(this, com.example.jayden.mobileteamproject.KakaoSignupActivity.class);
+        final Intent intent = new Intent(this, KakaoSignupActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
         finish();

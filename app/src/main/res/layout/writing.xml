@@ -28,90 +28,100 @@
 
         <Button
             android:id="@+id/addBook"
+            android:background="@drawable/button_background"
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:background="#444444"
             android:text="등록"
-            android:textColor="#EEEEEE"
+            android:textColor="#292929"
             android:textSize="20dp"
             android:textStyle="bold" />
     </RelativeLayout>
 
+
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
-
         <EditText
-            android:id="@+id/text"
+            android:id="@+id/postText"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="240dp"
             android:gravity="left"
             android:hint="내용을 입력해 주세요." />
+    </LinearLayout>
+
+
+
+
+
+        /************************************************************************************/
+<LinearLayout
+    android:id="@+id/select_book"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:visibility="invisible">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="@drawable/book_item_background"
+        android:padding="3dp">
+
+        <RelativeLayout
+            android:layout_width="65dp"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ivImg"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:background="@drawable/book_item_background"
-            android:orientation="horizontal"
-            android:padding="3dp">
-
-            <RelativeLayout
-                android:layout_width="65dp"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/ivImg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    />
-            </RelativeLayout>
+            android:orientation="vertical"
+            android:layout_width="0dp" android:layout_weight="1"
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:background="#EEEEEE">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tvTitle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ellipsize="end"
-                        android:singleLine="true"
-                        android:text="홍길동"
-                        android:textColor="#000000"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
-                    />
-                </LinearLayout>
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/tvAuthor"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:ellipsize="end"
-                    android:gravity="center_vertical"
-                    android:singleLine="true"
-                    android:text="Small Text"
-                    android:textColor="#000000"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
-            </LinearLayout>
-        </LinearLayout>
+                    android:layout_width="0dp" android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
 
+                    android:id="@+id/tvTitle"
+                    android:singleLine="true" android:ellipsize="end"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+
+                    android:id="@+id/tvAuthor" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp" android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+
+                android:id="@+id/tvDescription"
+                android:singleLine="true" android:ellipsize="end"/>
+        </LinearLayout>
+    </LinearLayout>
+        /************************************************************************************/
         <CheckBox
             android:id="@+id/chk"
             android:layout_width="wrap_content"
@@ -128,9 +138,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="20dp"
                 android:text="책 상태 : "
-                android:textSize="25dp"
+                android:gravity="center"
+                android:textSize="20dp"
                 android:textStyle="bold" />
 
             <RadioGroup
@@ -144,7 +155,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="최상"
-                    android:textSize="25dp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <RadioButton
@@ -152,7 +163,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="상"
-                    android:textSize="25dp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <RadioButton
@@ -160,7 +171,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="중"
-                    android:textSize="25dp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <RadioButton
@@ -168,10 +179,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="하"
-                    android:textSize="25dp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
 
             </RadioGroup>
         </LinearLayout>
+        <Button
+            android:layout_marginTop="10dp"
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="삭제"
+            android:layout_gravity="center"/>
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>

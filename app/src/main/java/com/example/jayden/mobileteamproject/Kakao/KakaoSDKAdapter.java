@@ -1,8 +1,9 @@
-package com.example.jayden.mobileteamproject;
+package com.example.jayden.mobileteamproject.Kakao;
 
 import android.app.Activity;
 import android.content.Context;
 
+import com.example.jayden.mobileteamproject.Kakao.GlobalApplication;
 import com.kakao.auth.ApprovalType;
 import com.kakao.auth.AuthType;
 import com.kakao.auth.IApplicationConfig;
@@ -49,7 +50,7 @@ public class KakaoSDKAdapter extends KakaoAdapter {
         return new IApplicationConfig() {
             @Override
             public Activity getTopActivity() {
-                return com.example.jayden.mobileteamproject.GlobalApplication.getCurrentActivity();
+                return GlobalApplication.getCurrentActivity();
             }
 
             @Override

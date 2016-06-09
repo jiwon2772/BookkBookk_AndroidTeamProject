@@ -1,24 +1,20 @@
-package com.example.jayden.mobileteamproject;
+package com.example.jayden.mobileteamproject.Kakao;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
-import com.kakao.auth.ApiResponseCallback;
+import com.example.jayden.mobileteamproject.Main.MainActivity;
 import com.kakao.auth.ErrorCode;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
-import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.usermgmt.callback.MeResponseCallback;
 import com.kakao.usermgmt.response.model.UserProfile;
 
 import com.kakao.util.helper.log.Logger;
 
-import com.example.jayden.mobileteamproject.*;
-import com.example.jayden.mobileteamproject.LoginActivity;
+import com.example.jayden.mobileteamproject.Main.LoginActivity;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

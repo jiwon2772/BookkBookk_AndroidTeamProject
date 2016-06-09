@@ -1,11 +1,9 @@
-package com.example.jayden.mobileteamproject;
+package com.example.jayden.mobileteamproject.Posting;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,14 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.jayden.mobileteamproject.Posting.Post;
+import com.example.jayden.mobileteamproject.R;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -74,14 +71,6 @@ public class PostAdapter extends BaseAdapter {
         TextView text = (TextView) convertView.findViewById(R.id.text);
         //LinearLayout layout_view =  (LinearLayout)convertView.findViewById(R.id.view);
 
-        //book.setImageAddress(arr.get(position).bookUrl);// 책 이미지를 각 리스트뷰에 연결해줌
-        // BookImage.ImageLoaderTask bookTesk = new BookImage.ImageLoaderTask(book,)
-        //int resId=  m_activity.getResources().getIdentifier(arr.get(position).profileUrl, "drawable", m_activity.getPackageName());
-        // setting Item adapter
-
-        //ImageLoaderTask task = new ImageLoaderTask(profile, book, arr.get(position).profileUrl, arr.get(position).bookUrl);
-        //task.execute();
-
         user.setText(arr.get(position).nickname);         // 유저아이디를 각 리스트뷰에 연결해줌
         time.setText(arr.get(position).time);
         text.setText(arr.get(position).text);
@@ -97,44 +86,44 @@ public class PostAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public class ImageLoaderTask extends AsyncTask<Void, Void, Bitmap[]> {
-
-        /**
-         * The target image view to load an image
-         */
-        private ImageView profileView;
-        private ImageView bookView;
-
-        /**
-         * The address where an image is stored.
-         */
-        private String profileAddress;
-        private String bookAddress;
-
-        public ImageLoaderTask(ImageView firstView, ImageView secondView, String firstAddress, String secondAddress) {
-            this.profileView = firstView;
-            this.bookView = secondView;
-            this.profileAddress = firstAddress;
-            this.bookAddress = secondAddress;
-        }
-
-        @Override
-        protected Bitmap[] doInBackground(Void... params) {
-            Bitmap[] bitmap = new Bitmap[2];
-            try {
-                InputStream is = new java.net.URL(this.profileAddress).openStream();
-                bitmap[0] = BitmapFactory.decodeStream(is);
-                is = new java.net.URL(this.bookAddress).openStream();
-                bitmap[1] = BitmapFactory.decodeStream(is);
-            } catch (IOException e) {
-                Log.e("ImageLoaderTask", "Cannot load image from " + this.profileAddress);
-            }
-            return bitmap;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap[] bitmap) {
-            updateProfile(profileView, bookView, bitmap);
-        }
-    }
+//    public class ImageLoaderTask extends AsyncTask<Void, Void, Bitmap[]> {
+//
+//        /**
+//         * The target image view to load an image
+//         */
+//        private ImageView profileView;
+//        private ImageView bookView;
+//
+//        /**
+//         * The address where an image is stored.
+//         */
+//        private String profileAddress;
+//        private String bookAddress;
+//
+//        public ImageLoaderTask(ImageView firstView, ImageView secondView, String firstAddress, String secondAddress) {
+//            this.profileView = firstView;
+//            this.bookView = secondView;
+//            this.profileAddress = firstAddress;
+//            this.bookAddress = secondAddress;
+//        }
+//
+//        @Override
+//        protected Bitmap[] doInBackground(Void... params) {
+//            Bitmap[] bitmap = new Bitmap[2];
+//            try {
+//                InputStream is = new java.net.URL(this.profileAddress).openStream();
+//                bitmap[0] = BitmapFactory.decodeStream(is);
+//                is = new java.net.URL(this.bookAddress).openStream();
+//                bitmap[1] = BitmapFactory.decodeStream(is);
+//            } catch (IOException e) {
+//                Log.e("ImageLoaderTask", "Cannot load image from " + this.profileAddress);
+//            }
+//            return bitmap;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Bitmap[] bitmap) {
+//            updateProfile(profileView, bookView, bitmap);
+//        }
+//    }
 }

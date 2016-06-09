@@ -1,4 +1,4 @@
-package com.example.jayden.mobileteamproject;
+package com.example.jayden.mobileteamproject.Posting;
 
 import android.graphics.Bitmap;
 
@@ -32,5 +32,11 @@ public class Post {
         time = ti;
         text = te;
         bitmap = null;
+    }
+    public Post(long i, String b, String date, String txt) {
+        userId = i;
+        bookUrl = b;
+        time = date;
+        text = txt;
     }
 }

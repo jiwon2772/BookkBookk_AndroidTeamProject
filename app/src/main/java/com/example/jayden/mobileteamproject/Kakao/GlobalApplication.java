@@ -1,4 +1,4 @@
-package com.example.jayden.mobileteamproject;
+package com.example.jayden.mobileteamproject.Kakao;
 
 import android.app.Activity;
 import android.app.Application;
