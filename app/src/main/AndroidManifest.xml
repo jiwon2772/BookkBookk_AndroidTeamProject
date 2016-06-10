@@ -8,16 +8,11 @@
         android:name=".Kakao.GlobalApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
         android:largeHeap="true"
+        android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".Main.MainActivity"></activity>
+        <activity android:name=".Main.MainActivity" />
         <activity android:name=".Main.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Kakao.KakaoSignupActivity" />
         <activity android:name=".Kakao.KakaoSDKAdapter" />
@@ -26,6 +21,13 @@
         <activity android:name=".Search.BookSearch" />
         <activity android:name=".BookShelf.BookShelfActivity" />
 
+        <activity android:name=".Main.SplashActivity">
+            <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
