@@ -63,7 +63,6 @@ public class PostAdapter extends BaseAdapter {
             convertView = mInflater.inflate(res, parent, false);
         }
 
-        // BookImage book  = (BookImage)convertView.findViewById(R.id.bookimage);   // custom view를 사용하는 경우
         ImageView book = (ImageView) convertView.findViewById(R.id.bookimage);
         ImageView profile = (ImageView) convertView.findViewById(R.id.profile);
         TextView user = (TextView) convertView.findViewById(R.id.user);
@@ -85,45 +84,4 @@ public class PostAdapter extends BaseAdapter {
         // notifyDataSetChanged();
         return convertView;
     }
-
-//    public class ImageLoaderTask extends AsyncTask<Void, Void, Bitmap[]> {
-//
-//        /**
-//         * The target image view to load an image
-//         */
-//        private ImageView profileView;
-//        private ImageView bookView;
-//
-//        /**
-//         * The address where an image is stored.
-//         */
-//        private String profileAddress;
-//        private String bookAddress;
-//
-//        public ImageLoaderTask(ImageView firstView, ImageView secondView, String firstAddress, String secondAddress) {
-//            this.profileView = firstView;
-//            this.bookView = secondView;
-//            this.profileAddress = firstAddress;
-//            this.bookAddress = secondAddress;
-//        }
-//
-//        @Override
-//        protected Bitmap[] doInBackground(Void... params) {
-//            Bitmap[] bitmap = new Bitmap[2];
-//            try {
-//                InputStream is = new java.net.URL(this.profileAddress).openStream();
-//                bitmap[0] = BitmapFactory.decodeStream(is);
-//                is = new java.net.URL(this.bookAddress).openStream();
-//                bitmap[1] = BitmapFactory.decodeStream(is);
-//            } catch (IOException e) {
-//                Log.e("ImageLoaderTask", "Cannot load image from " + this.profileAddress);
-//            }
-//            return bitmap;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Bitmap[] bitmap) {
-//            updateProfile(profileView, bookView, bitmap);
-//        }
-//    }
 }

@@ -2,10 +2,12 @@ package com.example.jayden.mobileteamproject.Posting;
 
 import android.graphics.Bitmap;
 
+import java.io.Serializable;
+
 /**
  * Created by Jayden on 2016-05-12.
  */
-public class Post {
+public class Post implements Serializable {
     public Long userId;
     public String bookUrl;
     public String profileUrl;

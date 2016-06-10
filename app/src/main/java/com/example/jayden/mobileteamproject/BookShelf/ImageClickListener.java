@@ -32,7 +32,7 @@ public class   ImageClickListener implements View.OnClickListener{
         // 인텐트 객체를 정의 후 이 액티비티를 실행합니다.
 
         Intent intent = new Intent(context, ImageActivity.class);
-        intent.putExtra("image ID", selected.userId);
+        intent.putExtra("post",selected);
         context.startActivity(intent);
     }
 

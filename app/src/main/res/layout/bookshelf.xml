@@ -3,19 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.jayden.mobileteamproject.MainActivity">
+    tools:context="com.example.jayden.mobileteamproject.MainActivity"
+    android:orientation="vertical">
 
     <com.example.jayden.mobileteamproject.BookShelf.BookShelfView
         android:id="@+id/gridViewImages"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:columnWidth="100dp"
         android:numColumns="3"
-        android:verticalSpacing="20dp"
-        android:horizontalSpacing="10dp"
-        android:gravity="center"
-        android:paddingBottom="10dp"
-        android:stretchMode="columnWidth"
     />
 
 </LinearLayout>

@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.androidquery.AQuery;
+import com.example.jayden.mobileteamproject.Posting.Post;
 import com.example.jayden.mobileteamproject.R;
 
 /**
@@ -12,28 +15,33 @@ import com.example.jayden.mobileteamproject.R;
  * 서재에서 책 누르면 나오는 책 정보 액티비티
  */
 public class ImageActivity extends Activity{
+
+    AQuery aq;
+    Post post;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.simple_book_image);
+        setContentView(R.layout.post_layout);
+        aq = new AQuery(this);
+
+        Intent receivedIntent = getIntent();
+        post = (Post)receivedIntent.getSerializableExtra("post");
 
         //----------------------------------------------------------------
         // 확대되는 이미지를 보여주기 위해 ImageView 뷰를 설정합니다.
-        ImageView imageView = (ImageView)findViewById(R.id.imageView);
-        setImage(imageView);
+        ImageView book = (ImageView)findViewById(R.id.bookimage);
+        ImageView profile = (ImageView) findViewById(R.id.profile);
+        TextView user = (TextView) findViewById(R.id.user);
+        TextView time = (TextView) findViewById(R.id.time);
+        TextView text = (TextView) findViewById(R.id.text);
+        user.setText(post.nickname);         // 유저아이디를 각 리스트뷰에 연결해줌
+        time.setText(post.time);
+        text.setText(post.text);
+        setImage(book,post.bookUrl);
+        setImage(profile,post.profileUrl);
     }
 
-    private void setImage(ImageView imageView) {
-        //----------------------------------------------------------------
-        // 초기 액티비티의 GridView 뷰의 이미지 항목을 클릭할 때 생성된 인텐트는
-        // 이 액티비티는 getIntent 메소드를 호출하여 접근할 수 있습니다.
-        Intent receivedIntent = getIntent();
-
-        //----------------------------------------------------------------
-        // 확대되는 이미지의 리소스 ID를 인텐트로부터 읽어들이고,
-        // 그것을 ImageView 뷰의 이미지 리소스로 설정합니다.
-
-        int imageID = (Integer)receivedIntent.getExtras().get("image ID");
-        imageView.setImageResource(imageID);
+    private void setImage(ImageView imageView, String url) {
+        aq.id(imageView).image(url);
     }
 }
