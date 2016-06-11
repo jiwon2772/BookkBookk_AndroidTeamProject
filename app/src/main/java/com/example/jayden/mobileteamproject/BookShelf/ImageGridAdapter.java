@@ -3,22 +3,15 @@ package com.example.jayden.mobileteamproject.BookShelf;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
-import android.os.AsyncTask;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.androidquery.AQuery;
 import com.example.jayden.mobileteamproject.Posting.Post;
-import com.example.jayden.mobileteamproject.R;
 
 import java.io.IOException;
 import java.io.InputStream;
