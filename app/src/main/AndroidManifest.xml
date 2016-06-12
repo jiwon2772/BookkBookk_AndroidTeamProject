@@ -10,28 +10,33 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        android:theme="@style/AppTheme">
         <activity android:name=".Main.MainActivity" />
-        <activity android:name=".Main.LoginActivity">
-        </activity>
+        <activity android:name=".Main.LoginActivity"></activity>
         <activity android:name=".Kakao.KakaoSignupActivity" />
         <activity android:name=".Kakao.KakaoSDKAdapter" />
         <activity android:name=".Kakao.GlobalApplication" />
         <activity android:name=".Posting.Writing" />
         <activity android:name=".Search.BookSearch" />
         <activity android:name=".BookShelf.BookShelfActivity" />
-
         <activity android:name=".Main.SplashActivity">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".BookShelf.ImageActivity" />
+
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
+
+        <activity android:name=".Main.Main2Activity"></activity>
+        <activity android:name=".Friend.FriendList"/>
+        <activity android:name=".Request.RequestList"/>
+        <activity android:name=".Friend.popular_lib"/>
+        <activity android:name=".Main.FragmentsTab"/>
     </application>
 
 </manifest>

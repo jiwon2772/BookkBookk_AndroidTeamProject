@@ -3,22 +3,24 @@ package com.example.jayden.mobileteamproject.Main;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
-import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Message;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.jayden.mobileteamproject.BookShelf.BookShelfActivity;
 import com.example.jayden.mobileteamproject.Posting.Post;
 import com.example.jayden.mobileteamproject.Posting.PostAdapter;
 import com.example.jayden.mobileteamproject.Posting.Writing;
 import com.example.jayden.mobileteamproject.R;
-import com.kakao.usermgmt.UserManagement;
-import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,9 +34,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-// from 2016/05/06 by Jiwon
-public class MainActivity extends AppCompatActivity {
-
+/**
+ * Created by Jayden on 2016-06-11.
+ */
+public class Page_2 extends android.support.v4.app.Fragment {
     protected ArrayList<Post> lists;
     PostAdapter adapter;
     Button menu;
@@ -53,29 +56,33 @@ public class MainActivity extends AppCompatActivity {
             lists.get(msg.what).bitmap = bitmapList[msg.what];
             current = current + 1;
             if(length == current) {
-                adapter = new PostAdapter(MainActivity.this, lists);
+                adapter = new PostAdapter(getActivity(), lists);
                 adapter.notifyDataSetInvalidated();
                 listView.setAdapter(adapter);
+                current = 0;
             }
         }
     };
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        LinearLayout linearLayout = (LinearLayout) inflater.inflate(R.layout.activity_main, container, false);
 
 
-//        menu = (Button)findViewById(R.id.menu);
-//        search = (Button)findViewById(R.id.searchButton);
-//        write = (Button)findViewById(R.id.write);
-//
+//        menu = (Button)linearLayout.findViewById(R.id.menu);
+//        search = (Button)linearLayout.findViewById(R.id.searchButton);
+//        write = (Button)linearLayout.findViewById(R.id.write);
+
 //        //각 버튼의 이벤트핸들러 구현
 //        menu.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, BookShelfActivity.class);
+//                Intent intent = new Intent(getActivity(), BookShelfActivity.class);
 //                intent.putExtra("id",id);
 //                startActivity(intent);
 //            }
@@ -89,58 +96,23 @@ public class MainActivity extends AppCompatActivity {
 //        write.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, Writing.class );
+//                Intent intent = new Intent(getActivity(), Writing.class );
 //                intent.putExtra("id",id);
 //                startActivity(intent);
 //            }
 //        });
 
-        listView = (ListView) findViewById(R.id.postlist);
+        listView = (ListView)linearLayout.findViewById(R.id.postlist);
         lists = new ArrayList<Post>();
         task = new phpDown();
         task.execute("http://jiwon2772.16mb.com/mainActivity.php");//도메인을 실행
-
-        Intent a = getIntent();
-        id = a.getLongExtra("id", 0);
-        String nick = a.getStringExtra("nick");
-        String profile = a.getStringExtra("profileImage");
 
 //        adapter = new PostAdapter(MainActivity.this, lists);
 //        adapter.notifyDataSetInvalidated();
 //        listView.setAdapter(adapter);
 
+        return linearLayout;
     }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        //lists.clear();
-        //task = new phpDown();
-        //task.execute("http://jiwon2772.16mb.com/mainActivity.php");//도메인을 실행
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        //onClickLogout();
-    }
-
-    private void onClickLogout() {
-        UserManagement.requestLogout(new LogoutResponseCallback() {
-            @Override
-            public void onCompleteLogout() {
-                redirectLoginActivity();
-            }
-        });
-    }
-
-    protected void redirectLoginActivity() {
-        final Intent intent = new Intent(this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        startActivity(intent);
-        finish();
-    }
-
     private class phpDown extends AsyncTask<String, Integer, String> {
 
         @Override
