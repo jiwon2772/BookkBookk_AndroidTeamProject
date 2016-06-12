@@ -11,15 +11,23 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Main.MainActivity" />
-        <activity android:name=".Main.LoginActivity"></activity>
-        <activity android:name=".Kakao.KakaoSignupActivity" />
+
+        <activity
+            android:name=".Main.LoginActivity"
+            android:theme="@style/NoAction"></activity>
+        <activity
+            android:name=".Kakao.KakaoSignupActivity"
+            android:theme="@style/NoAction" />
         <activity android:name=".Kakao.KakaoSDKAdapter" />
         <activity android:name=".Kakao.GlobalApplication" />
         <activity android:name=".Posting.Writing" />
         <activity android:name=".Search.BookSearch" />
-        <activity android:name=".BookShelf.BookShelfActivity" />
-        <activity android:name=".Main.SplashActivity">
+        <activity
+            android:name=".BookShelf.BookShelfActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Main.SplashActivity"
+            android:theme="@style/NoAction">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,11 +40,14 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
 
-        <activity android:name=".Main.Main2Activity"></activity>
-        <activity android:name=".Friend.FriendList"/>
-        <activity android:name=".Request.RequestList"/>
-        <activity android:name=".Friend.popular_lib"/>
-        <activity android:name=".Main.FragmentsTab"/>
+        <activity android:name=".Main.MainActivity"></activity>
+        <activity android:name=".Friend.FriendList" />
+        <activity android:name=".Request.RequestList" />
+        <activity android:name=".Friend.popular_lib" />
+        <activity android:name=".Main.FragmentsTab" />
+        <activity android:name=".Search.BookInfo" />
+        <activity android:name=".Search.BookInfo2" />
+        <activity android:name=".Search.BookSearch2" />
     </application>
 
 </manifest>

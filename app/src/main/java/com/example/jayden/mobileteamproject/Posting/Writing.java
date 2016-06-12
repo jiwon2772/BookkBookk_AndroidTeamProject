@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidquery.AQuery;
 import com.example.jayden.mobileteamproject.R;
@@ -31,8 +32,8 @@ import java.net.URLEncoder;
  */
 public class Writing extends AppCompatActivity implements View.OnClickListener {
 
-    ImageButton search;
     LinearLayout selected_book;
+    LinearLayout SearchBook;
     ImageView ivImg;
     TextView tvTitle;
     TextView tvAuthor;
@@ -65,12 +66,11 @@ public class Writing extends AppCompatActivity implements View.OnClickListener {
         tvDescription = (TextView) findViewById(R.id.tvDescription);
         delete = (Button) findViewById(R.id.delete);
         addBook = (Button) findViewById(R.id.addBook);
-        text = (EditText)findViewById(R.id.postText);
         isHave = (CheckBox)findViewById(R.id.chk);
+        SearchBook = (LinearLayout)findViewById(R.id.SearchBook);
+        img = null; //초기화
 
-
-        search = (ImageButton) findViewById(R.id.search);
-        search.setOnClickListener(this);
+        SearchBook.setOnClickListener(this);
         delete.setOnClickListener(this);
         addBook.setOnClickListener(this);
 
@@ -82,7 +82,7 @@ public class Writing extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == search.getId()) {
+        if (view.getId() == SearchBook.getId()) {
             Intent i = new Intent(Writing.this, BookSearch.class);
             Bundle myData = new Bundle();
             i.putExtras(myData);
@@ -92,6 +92,10 @@ public class Writing extends AppCompatActivity implements View.OnClickListener {
             selected_book.setVisibility(View.INVISIBLE);
         }
         if (view.getId() == addBook.getId()) {
+            if(img == null) {
+                Toast.makeText(Writing.this,"책을 선택해 주셔야 합니다.",Toast.LENGTH_SHORT).show();
+                return;
+            }
             String txt = text.getText().toString();
             try {
                 txt = URLEncoder.encode(new String(txt.getBytes("UTF-8")));

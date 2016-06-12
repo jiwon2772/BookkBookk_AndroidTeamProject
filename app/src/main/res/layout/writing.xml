@@ -9,13 +9,6 @@
         android:layout_height="60dp"
         android:background="#EEEEEE">
 
-        <ImageButton
-            android:id="@+id/search"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/search" />
 
         <TextView
             android:layout_width="130dp"
@@ -28,12 +21,12 @@
 
         <Button
             android:id="@+id/addBook"
-            android:background="@drawable/button_background"
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
+            android:background="@drawable/button_background"
             android:text="등록"
             android:textColor="#292929"
             android:textSize="20dp"
@@ -41,87 +34,103 @@
     </RelativeLayout>
 
 
-
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <EditText
-            android:id="@+id/postText"
+            android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="240dp"
             android:gravity="left"
-            android:hint="내용을 입력해 주세요." />
-    </LinearLayout>
+            android:hint="내용을 입력해 주세요."
+            android:padding="20dp" />
 
-
-
-
-
-        /************************************************************************************/
-<LinearLayout
-    android:id="@+id/select_book"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:visibility="invisible">
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:background="@drawable/book_item_background"
-        android:padding="3dp">
-
-        <RelativeLayout
-            android:layout_width="65dp"
-            android:layout_height="match_parent">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/ivImg"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true" />
-
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:hint="책 검색을 해주세요." />
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="match_parent">
+            android:id="@+id/SearchBook"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@drawable/book_item_background"
+            android:orientation="horizontal"
+            android:padding="3dp">
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="0dp" android:layout_weight="1">
+            <RelativeLayout
+                android:layout_width="65dp"
+                android:layout_height="match_parent">
 
-                <TextView
-                    android:layout_width="0dp" android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-
-                    android:id="@+id/tvTitle"
-                    android:singleLine="true" android:ellipsize="end"/>
-
-                <TextView
+                <ImageView
+                    android:id="@+id/ivImg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true" />
 
-                    android:id="@+id/tvAuthor" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <TextView
+                        android:id="@+id/tvAuthor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp" android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-
-                android:id="@+id/tvDescription"
-                android:singleLine="true" android:ellipsize="end"/>
         </LinearLayout>
     </LinearLayout>
+
+
+    /************************************************************************************/
+
+    <LinearLayout
+        android:id="@+id/select_book"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
         /************************************************************************************/
+
         <CheckBox
             android:id="@+id/chk"
             android:layout_width="wrap_content"
@@ -139,8 +148,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:text="책 상태 : "
                 android:gravity="center"
+                android:text="책 상태 : "
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -184,12 +193,13 @@
 
             </RadioGroup>
         </LinearLayout>
+
         <Button
-            android:layout_marginTop="10dp"
             android:id="@+id/delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="삭제"
-            android:layout_gravity="center"/>
-        </LinearLayout>
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="삭제" />
     </LinearLayout>
+</LinearLayout>

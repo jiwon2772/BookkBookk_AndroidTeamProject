@@ -1,6 +1,8 @@
 package com.example.jayden.mobileteamproject.Main;
 
+import android.app.ActionBar;
 import android.content.Intent;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -12,13 +14,17 @@ import com.kakao.util.helper.log.Logger;
 
 import com.example.jayden.mobileteamproject.Kakao.KakaoSignupActivity;
 
-public class LoginActivity extends AppCompatActivity{
+public class LoginActivity extends ActionBarActivity {
 
     private SessionCallback callback;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+//        // 액션바 숨기기
+//        ActionBar actionBar = getActionBar();
+//        actionBar.hide();
 
         callback = new SessionCallback();                  // 이 두개의 함수 중요함
         Session.getCurrentSession().addCallback(callback);

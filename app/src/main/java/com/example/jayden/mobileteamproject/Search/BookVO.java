@@ -6,6 +6,7 @@ public class BookVO {
     private String imgUrl;
     private String description;
     private String ISBN;
+    private String publisher;
 
     public String getDescription() {
         return description;
@@ -45,5 +46,12 @@ public class BookVO {
 
     public void setISBN(String isbn) {
         ISBN = isbn;
+    }
+
+    public String getPublisher(){
+        return this.publisher;
+    }
+    public void setPublisher(String publisher){
+        this.publisher = publisher;
     }
 }

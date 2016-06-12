@@ -2,9 +2,10 @@ package com.example.jayden.mobileteamproject.BookShelf;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+
 import com.example.jayden.mobileteamproject.Posting.Post;
 import com.example.jayden.mobileteamproject.R;
 
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 /**
  * Created by Administrator on 2016-06-08.
  */
-public class BookShelfActivity extends Activity {
+public class BookShelfActivity extends ActionBarActivity {
 
     protected ArrayList<Post> shelfLists;
     int length;

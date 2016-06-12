@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.jayden.mobileteamproject.Main.Main2Activity;
 import com.example.jayden.mobileteamproject.Main.MainActivity;
 import com.kakao.auth.ErrorCode;
 import com.kakao.network.ErrorResult;
@@ -36,7 +35,7 @@ public class KakaoSignupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        passIntent = new Intent(this, Main2Activity.class);
+        passIntent = new Intent(this, MainActivity.class);
         requestMe();
     }
 

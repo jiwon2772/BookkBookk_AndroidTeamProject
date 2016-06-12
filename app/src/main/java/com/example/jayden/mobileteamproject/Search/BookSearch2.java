@@ -1,7 +1,10 @@
 package com.example.jayden.mobileteamproject.Search;
 
+/**
+ * Created by Jayden on 2016-06-12.
+ */
+
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,9 +24,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
+ *  메인에서 검색했을 때
  */
-public class BookSearch extends Activity implements View.OnClickListener{
+public class BookSearch2 extends Activity implements View.OnClickListener{
 
     private  final String BOOK_URL = "https://openapi.naver.com/v1/search/book.xml?query=%s&display=20";
 
@@ -62,12 +65,12 @@ public class BookSearch extends Activity implements View.OnClickListener{
                 String title = mBookList.get(position).getTitle();
                 String description = mBookList.get(position).getDescription();
                 String img = mBookList.get(position).getImgUrl();
-                String isbn =  mBookList.get(position).getISBN();
                 String publisher = mBookList.get(position).getPublisher();
 
+
                 // BookInfo 엑티비티로 책정보를 가지고 전환
-                // BookSearch -> BookInfo
-                Intent toBookInfo = new Intent(BookSearch.this,BookInfo.class);
+                // BookSearchInMain -> BookInfo2
+                Intent toBookInfo = new Intent(BookSearch2.this,BookInfo2.class);
                 Bundle myData = new Bundle();
                 myData.putString("author",author);
                 myData.putString("title",title);
@@ -78,18 +81,6 @@ public class BookSearch extends Activity implements View.OnClickListener{
                 toBookInfo.putExtras(myData);
                 startActivityForResult(toBookInfo,1111); // 넘김 완료
 
-                // 번들 통해서 writing.xml에 선택한 책 정보를 넘긴다.
-                Intent myLocalIntent = getIntent();
-                Bundle myBundle = myLocalIntent.getExtras();
-
-                myBundle.putString("author",author);
-                myBundle.putString("title",title);
-                myBundle.putString("description",description);
-                myBundle.putString("img",img);
-                myBundle.putString("ISBN",isbn);
-
-                myLocalIntent.putExtras(myBundle);
-                setResult(Activity.RESULT_OK, myLocalIntent);
             }
 
         });
@@ -118,7 +109,6 @@ public class BookSearch extends Activity implements View.OnClickListener{
                         String strAuthor = item.tag("author").text();
                         String strImg = item.tag("image").text();
                         String strPublisher = item.tag("publisher").text();
-                        String strISBN = item.tag("isbn").text();
 
                         BookVO book = new BookVO();
                         book.setTitle(strTitle);
@@ -126,8 +116,6 @@ public class BookSearch extends Activity implements View.OnClickListener{
                         book.setImgUrl(strImg);
                         book.setDescription(item.tag("description").text());
                         book.setPublisher(strPublisher);
-                        book.setISBN(strISBN);
-
                         mBookList.add(book);
                     }
 
@@ -138,19 +126,5 @@ public class BookSearch extends Activity implements View.OnClickListener{
                     .header("X-Naver-Client-Secret", "fa1vHElxst"));
         }
     }
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        try {
-            if ((requestCode == 1111 ) && (resultCode == Activity.RESULT_OK)){
-                Bundle myResults = data.getExtras();
-                String select = myResults.getString("select");
-                if(select.equals("true"))
-                    finish();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }//onActivityResult
 
 }
-

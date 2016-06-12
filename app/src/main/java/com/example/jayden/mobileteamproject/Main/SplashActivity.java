@@ -1,7 +1,7 @@
 package com.example.jayden.mobileteamproject.Main;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
@@ -9,7 +9,7 @@ import android.view.WindowManager;
 
 import com.example.jayden.mobileteamproject.R;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends Activity {
 
     private static String TAG = SplashActivity.class.getName();
     private static long SLEEP_TIME = 2; // Sleep for some time
