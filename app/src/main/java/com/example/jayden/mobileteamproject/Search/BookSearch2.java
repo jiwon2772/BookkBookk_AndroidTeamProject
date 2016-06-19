@@ -68,7 +68,7 @@ public class BookSearch2 extends Activity implements View.OnClickListener{
                 String publisher = mBookList.get(position).getPublisher();
 
 
-                // BookInfo 엑티비티로 책정보를 가지고 전환
+                // BookInfo2 엑티비티로 책정보를 가지고 전환
                 // BookSearchInMain -> BookInfo2
                 Intent toBookInfo = new Intent(BookSearch2.this,BookInfo2.class);
                 Bundle myData = new Bundle();
@@ -79,7 +79,7 @@ public class BookSearch2 extends Activity implements View.OnClickListener{
                 myData.putString("publisher",publisher);
 
                 toBookInfo.putExtras(myData);
-                startActivityForResult(toBookInfo,1111); // 넘김 완료
+                startActivity(toBookInfo);
 
             }
 

@@ -48,7 +48,7 @@ public class BookShelfView extends GridView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         int x, y, width, height;
-        background = BitmapFactory.decodeResource(getResources(), R.drawable.shelf_panel_new);
+        background = BitmapFactory.decodeResource(getResources(), R.drawable.bookk_bookcase);
         //이미지 자르기
         width = getBackgroundWidth();
         height = getBackgroundHeight();

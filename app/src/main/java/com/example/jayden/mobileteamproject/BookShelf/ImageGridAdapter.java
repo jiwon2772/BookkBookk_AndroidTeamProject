@@ -111,10 +111,14 @@ public class ImageGridAdapter extends BaseAdapter {
             // GridView 뷰를 구성할 ImageView 뷰들을 정의합니다.
             // 뷰에 지정할 이미지는 앞에서 정의한 비트맵 객체입니다.
             imageView = new ImageView(context);
-            int topPadding = (int)(itsHeight / 4 * 0.15);
+            int topPadding = (int)(itsHeight / 4 * 0.09);
+            int leftPadding = (int)(itsWidth / 3 * 0.15);
+            int lineOption = 0;
+            if(position >= 3)
+                lineOption = 55;
             imageView.setPadding(0, topPadding, 0, 0);
             imageView.setImageBitmap(new_bmp);
-            imageView.setPadding(0, topPadding, 0, 0);
+            imageView.setPadding(leftPadding, lineOption + topPadding, 0, 0);
             //-------------------------------------------------------------
 
             ImageClickListener imageViewClickListener

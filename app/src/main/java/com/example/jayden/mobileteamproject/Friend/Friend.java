@@ -4,14 +4,20 @@ package com.example.jayden.mobileteamproject.Friend;
  * Created by Jayden on 2016-06-12.
  */
 public class Friend {
+    public long userId;
     public String prof_url;
-    public String pro_id;
+    public String nick;
 
-    public Friend(String p_img, String p_id)
+    public Friend(String p_img, String p_nick)
     {
         prof_url = p_img;
-        pro_id = p_id;
-
+        nick = p_nick;
+    }
+    public Friend(long p_id,String p_img,String p_nick )
+    {
+        userId = p_id;
+        prof_url = p_img;
+        nick = p_nick;
     }
 }
 

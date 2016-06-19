@@ -1,21 +1,20 @@
-package com.example.jayden.mobileteamproject.Search;
+package com.example.jayden.mobileteamproject.Friend;
 
-// Created by Jayden on 2016-06-12.
-
-import android.app.Activity;
-import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
+import android.os.Message;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Html;
-import android.widget.ImageView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.androidquery.AQuery;
-import com.example.jayden.mobileteamproject.BookShelf.BookShelfActivity;
-import com.example.jayden.mobileteamproject.BookShelf.ImageGridAdapter;
-import com.example.jayden.mobileteamproject.Friend.Friend;
-import com.example.jayden.mobileteamproject.Friend.FriendAdapter;
 import com.example.jayden.mobileteamproject.Posting.Post;
 import com.example.jayden.mobileteamproject.R;
 
@@ -24,60 +23,40 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class BookInfo2 extends Activity {
+public class AddFriend extends ActionBarActivity {
 
-    TextView title;
-    TextView author;
-    TextView description;
-    TextView publisher;
-    ImageView imageView;
-    Bundle myBundle;
-    Intent receivedIntent;
-    private AQuery aq;
-    ListView fListView;
     protected ArrayList<Friend> lists;
     FriendAdapter adapter;
-    int length;
+    ListView listView;
+    int length; // the number of lists
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.book_info2);
+        setContentView(R.layout.activity_add_friend);
 
-        aq = new AQuery( this );
-        title = (TextView)findViewById(R.id.infoTitle);
-        author = (TextView)findViewById(R.id.infoAuthor);
-        description = (TextView)findViewById(R.id.infoDescription);
-        publisher = (TextView)findViewById(R.id.infoPublisher);
-        imageView = (ImageView)findViewById(R.id.imageView);
-        fListView = (ListView)findViewById(R.id.fListView);
+        // primary sections of the activity.
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);            //액션바 아이콘을 업 네비게이션 형태로 표시합니다.
+        getSupportActionBar().setDisplayShowTitleEnabled(false);        //액션바에 표시되는 제목의 표시유무를 설정합니다.
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
+        View mCustomView = LayoutInflater.from(this).inflate(R.layout.people_actionbar, null);
+        getSupportActionBar().setCustomView(mCustomView);
+
+        //기본 변수 초기화
+        listView = (ListView) findViewById(R.id.fListView);
         lists = new ArrayList<Friend>();
         adapter = new FriendAdapter(this, lists);
-        fListView.setAdapter(adapter);
-
-
-        receivedIntent = getIntent();
-        myBundle = receivedIntent.getExtras();
-        String title_ = myBundle.getString("title");
-        String author_ = myBundle.getString("author");
-        String description_ = myBundle.getString("description");
-        String publisher_ = myBundle.getString("publisher");
-        String img_ = myBundle.getString("img");
-        myBundle.putString("select", "false"); // 선택버튼 눌렀는지 판단. false(안누름)으로 초기화
-
-        title.setText(Html.fromHtml(title_));
-        author.setText(Html.fromHtml(author_));
-        description.setText(Html.fromHtml(description_));
-        publisher.setText(Html.fromHtml(publisher_));
-        aq.id(imageView).image(img_);
-
-        phpDown task =  new phpDown();
-        task.execute("http://jiwon2772.16mb.com/mainActivity.php");
-
+        //adapter.notifyDataSetInvalidated();
+        listView.setAdapter(adapter);
     }
     private class phpDown extends AsyncTask<String, Integer, String> {
 
@@ -113,6 +92,12 @@ public class BookInfo2 extends Activity {
             return jsonHtml.toString();
 
         }
+
+        /*
+        protected void onPostExecute(String str){
+            txtView.setText(str);
+        }
+        */
 
         protected void onPostExecute(String str) {
             long userId;

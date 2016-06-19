@@ -1,9 +1,9 @@
 package com.example.jayden.mobileteamproject.Main;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Message;
@@ -14,12 +14,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.example.jayden.mobileteamproject.BookShelf.BookShelfActivity;
 import com.example.jayden.mobileteamproject.Posting.Post;
 import com.example.jayden.mobileteamproject.Posting.PostAdapter;
-import com.example.jayden.mobileteamproject.Posting.Writing;
 import com.example.jayden.mobileteamproject.R;
 
 import org.json.JSONArray;
@@ -37,12 +34,10 @@ import java.util.ArrayList;
 /**
  * Created by Jayden on 2016-06-11.
  */
+// 타임라인입니다.
 public class Page_2 extends android.support.v4.app.Fragment {
     protected ArrayList<Post> lists;
     PostAdapter adapter;
-    Button menu;
-    Button search;
-    Button write;
     ListView listView;
     phpDown task;
     Bitmap[][] bitmapList;
@@ -73,43 +68,15 @@ public class Page_2 extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LinearLayout linearLayout = (LinearLayout) inflater.inflate(R.layout.activity_main, container, false);
 
-
-//        menu = (Button)linearLayout.findViewById(R.id.menu);
-//        search = (Button)linearLayout.findViewById(R.id.searchButton);
-//        write = (Button)linearLayout.findViewById(R.id.write);
-
-//        //각 버튼의 이벤트핸들러 구현
-//        menu.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), BookShelfActivity.class);
-//                intent.putExtra("id",id);
-//                startActivity(intent);
-//            }
-//        });
-//        search.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-//        write.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), Writing.class );
-//                intent.putExtra("id",id);
-//                startActivity(intent);
-//            }
-//        });
-
         listView = (ListView)linearLayout.findViewById(R.id.postlist);
         lists = new ArrayList<Post>();
-        task = new phpDown();
-        task.execute("http://jiwon2772.16mb.com/mainActivity.php");//도메인을 실행
 
-//        adapter = new PostAdapter(MainActivity.this, lists);
-//        adapter.notifyDataSetInvalidated();
-//        listView.setAdapter(adapter);
+        //해당 디바이스 기기의 가로,세로 길이를 구함(해상도)
+        int reWidth=(int)(getActivity().getWindowManager().getDefaultDisplay().getWidth());
+        int reHeight=(int)(getActivity().getWindowManager().getDefaultDisplay().getHeight());
+
+                task = new phpDown();
+        task.execute("http://jiwon2772.16mb.com/mainActivity.php");//도메인을 실행
 
         return linearLayout;
     }
@@ -209,15 +176,10 @@ public class Page_2 extends android.support.v4.app.Fragment {
                     ImageDown task_image = new ImageDown(i,profile,bookUrl);
                     task_image.start();
 
-                    //lists.add(new Post(userId, bookUrl, profile, nickname, date, text));
-                    //adapter.notifyDataSetInvalidated();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-//            adapter = new PostAdapter(MainActivity.this, lists);
-//            adapter.notifyDataSetInvalidated();
-//            listView.setAdapter(adapter);
         }
 
     }

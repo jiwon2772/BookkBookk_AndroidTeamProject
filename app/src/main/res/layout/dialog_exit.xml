@@ -1,0 +1,16 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#032335">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4"
+        android:textColor="#ffffff"
+        android:text="'새로운 책 문화의 시작: 부끄부끄' 정말 종료하시겠습니까?"
+        android:layout_margin="5dp" />
+
+</LinearLayout>

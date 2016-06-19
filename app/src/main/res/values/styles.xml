@@ -6,8 +6,12 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionBarSize">40dip</item>
     </style>
     <style name="NoAction" parent="Theme.AppCompat.Light.NoActionBar">
+    </style>
+    <style name="AlmostNoAction" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="actionBarSize">40dip</item>
     </style>
 
 </resources>

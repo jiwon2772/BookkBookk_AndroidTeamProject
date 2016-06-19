@@ -59,7 +59,7 @@ public class PostAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             int res = 0;
-            res = R.layout.post_layout;
+            res = R.layout.post_layout2;
             convertView = mInflater.inflate(res, parent, false);
         }
 

@@ -22,10 +22,6 @@ public class LoginActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-//        // 액션바 숨기기
-//        ActionBar actionBar = getActionBar();
-//        actionBar.hide();
-
         callback = new SessionCallback();                  // 이 두개의 함수 중요함
         Session.getCurrentSession().addCallback(callback);
     }

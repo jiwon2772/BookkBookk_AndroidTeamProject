@@ -1,11 +1,18 @@
 package com.example.jayden.mobileteamproject.BookShelf;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.androidquery.AQuery;
 import com.example.jayden.mobileteamproject.Posting.Post;
 import com.example.jayden.mobileteamproject.R;
 
@@ -29,15 +36,41 @@ public class BookShelfActivity extends ActionBarActivity {
     phpDown task;
     BookShelfView gridViewImages;
     ImageGridAdapter imageGridAdapter;
+    ImageView profileView;
+    TextView nickView;
+    private AQuery aq;
 
     long id; //접속한 사용자의 아이디
+    String profile;
+    String nickname;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bookshelf);
 
+        // 액션바 셋팅
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);            //액션바 아이콘을 업 네비게이션 형태로 표시합니다.
+        getSupportActionBar().setDisplayShowTitleEnabled(false);        //액션바에 표시되는 제목의 표시유무를 설정합니다.
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+
+        View mCustomView = LayoutInflater.from(this).inflate(R.layout.book_actionbar, null);
+        getSupportActionBar().setCustomView(mCustomView);
+        // 액션바 셋팅 끝
+
+        aq = new AQuery( this );
+        profileView = (ImageView)findViewById(R.id.user_profile);
+        nickView = (TextView)findViewById(R.id.user_nick);
+
         Intent a = getIntent();
         id = a.getLongExtra("id", 0);
+        profile = a.getStringExtra("profileImage");
+        nickname = a.getStringExtra("nick");
+
+        //상단 서재 주인 정보 세팅
+        nickView.setText(nickname);
+        aq.id(profileView).image(profile);
 
         shelfLists = new ArrayList<Post>();
 

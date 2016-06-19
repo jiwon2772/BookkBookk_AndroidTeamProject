@@ -1,35 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="240dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingTop="10dp"
     android:paddingBottom="10dp">
 
-    <ImageView
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:id="@+id/bookimage"/>
+        android:layout_height="170dp"
+        android:background="#71000000"
+        android:paddingTop="20dp">
+
+        <ImageView
+            android:layout_width="239dp"
+            android:layout_height="163dp"
+            android:id="@+id/bookimage"
+            android:background="#00000000" />
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#ffffff">
+        android:background="#ffa7a7">
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/profile"
             android:layout_marginLeft="10dp"
-            android:background="#fefefe" />
+            android:background="#ffa7a7"
+            android:layout_marginTop="10dp" />
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
-            android:background="#ffffff">
+            android:background="#ffa7a7">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -38,7 +48,7 @@
                 android:text=""
                 android:typeface="serif"
                 android:layout_weight="2"
-                android:textColor="#000000"
+                android:textColor="#ffffff"
                 android:gravity="center_vertical"
                 android:textSize="15sp" />
 
@@ -49,7 +59,8 @@
                 android:id="@+id/time"
                 android:typeface="serif"
                 android:textSize="10sp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textColor="#ffffff" />
         </LinearLayout>
 
     </LinearLayout>
@@ -62,6 +73,9 @@
         android:text=""
         android:textSize="13sp"
         android:typeface="serif"
-        android:background="#ffffff" />
+        android:background="#ffa7a7"
+        android:textColor="#ffffff"
+        android:paddingLeft="20dp"
+        android:paddingRight="10dp" />
 
 </LinearLayout>

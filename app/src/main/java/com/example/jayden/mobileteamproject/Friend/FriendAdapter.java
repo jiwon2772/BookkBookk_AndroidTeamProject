@@ -77,7 +77,7 @@ public class FriendAdapter extends BaseAdapter {
 
         ImageLoaderTask task = new ImageLoaderTask(pro_img,arr.get(position).prof_url);
         task.execute();
-        pro_id.setText(arr.get(position).pro_id);
+        pro_id.setText("" + arr.get(position).userId);
 
         return convertView;
     }

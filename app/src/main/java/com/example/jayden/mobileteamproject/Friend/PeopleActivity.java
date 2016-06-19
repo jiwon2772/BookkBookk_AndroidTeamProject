@@ -1,18 +1,12 @@
-package com.example.jayden.mobileteamproject.Main;
+package com.example.jayden.mobileteamproject.Friend;
 
-import android.app.Activity;
-
-import java.util.ArrayList;
 import java.util.Locale;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Handler;
-import android.os.Message;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -21,16 +15,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TabHost;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +29,7 @@ import com.example.jayden.mobileteamproject.R;
 /**
  * Created by SAMSUNG on 2016-06-10.
  */
-public class FragmentsTab extends ActionBarActivity implements ActionBar.TabListener {
+public class PeopleActivity extends ActionBarActivity implements ActionBar.TabListener {
 
     /**
      * The {@link PagerAdapter} that will provide
@@ -64,7 +53,7 @@ public class FragmentsTab extends ActionBarActivity implements ActionBar.TabList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fragments_tab);
+        setContentView(R.layout.activity_people_activity);
 
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
@@ -73,6 +62,21 @@ public class FragmentsTab extends ActionBarActivity implements ActionBar.TabList
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);            //액션바 아이콘을 업 네비게이션 형태로 표시합니다.
+        getSupportActionBar().setDisplayShowTitleEnabled(false);        //액션바에 표시되는 제목의 표시유무를 설정합니다.
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
+        View mCustomView = LayoutInflater.from(this).inflate(R.layout.people_actionbar, null);
+        getSupportActionBar().setCustomView(mCustomView);
+
+        ImageView addBtn = (ImageView)findViewById(R.id.person_add);
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -189,7 +193,7 @@ public class FragmentsTab extends ActionBarActivity implements ActionBar.TabList
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.activity_fragments_tab, container, false);
+            View rootView = inflater.inflate(R.layout.activity_people_activity, container, false);
             return rootView;
         }
     }

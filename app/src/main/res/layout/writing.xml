@@ -2,22 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#032335">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#EEEEEE">
+        android:layout_height="40dp"
+        android:background="#ffffff">
 
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/imageView2"
+            android:background="@drawable/bookk_topbar_button_write"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="4dp" />
 
         <TextView
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="글쓰기"
-            android:textColor="#3366FF"
+            android:textColor="#032335"
             android:textSize="25dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/imageView2"
+            android:layout_marginLeft="4dp" />
 
         <Button
             android:id="@+id/addBook"
@@ -26,11 +37,13 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:background="@drawable/button_background"
-            android:text="등록"
-            android:textColor="#292929"
+            android:background="@drawable/add_button_style"
+            android:text="OK"
+            android:textColor="#ffffff"
             android:textSize="20dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp" />
     </RelativeLayout>
 
 
@@ -40,25 +53,31 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/text"
+            android:id="@+id/postText"
             android:layout_width="match_parent"
             android:layout_height="240dp"
             android:gravity="left"
             android:hint="내용을 입력해 주세요."
-            android:padding="20dp" />
+            android:background="@drawable/bookinfo2_content"
+            android:padding="20dp"
+            android:layout_marginTop="5dp" />
 
         <TextView
             android:id="@+id/hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:hint="책 검색을 해주세요." />
+            android:layout_marginLeft="5dp"
+            android:textColor="#ffffff"
+            android:text="책 검색을 해주세요."
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp" />
 
         <LinearLayout
             android:id="@+id/SearchBook"
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            android:background="@drawable/book_item_background"
+            android:background="@drawable/bookinfo2_info"
             android:orientation="horizontal"
             android:padding="3dp">
 
@@ -137,7 +156,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_margin="10dp"
-            android:text="책을 보유하고 있습니다." />>
+            android:text="책을 보유하고 있습니다."
+            android:textColor="#c0c8cc"
+            android:buttonTint="@color/radio_color" />>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -151,7 +172,8 @@
                 android:gravity="center"
                 android:text="책 상태 : "
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#ffffff" />
 
             <RadioGroup
                 android:layout_width="match_parent"
@@ -165,7 +187,9 @@
                     android:layout_height="wrap_content"
                     android:text="최상"
                     android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="#3a9aae"
+                    android:buttonTint="@color/radio_color" />
 
                 <RadioButton
                     android:id="@+id/Top"
@@ -173,7 +197,9 @@
                     android:layout_height="wrap_content"
                     android:text="상"
                     android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="#3a9aae"
+                    android:buttonTint="@color/radio_color" />
 
                 <RadioButton
                     android:id="@+id/Mid"
@@ -181,7 +207,9 @@
                     android:layout_height="wrap_content"
                     android:text="중"
                     android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="#3a9aae"
+                    android:buttonTint="@color/radio_color" />
 
                 <RadioButton
                     android:id="@+id/Low"
@@ -189,17 +217,12 @@
                     android:layout_height="wrap_content"
                     android:text="하"
                     android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="#3a9aae"
+                    android:buttonTint="@color/radio_color" />
 
             </RadioGroup>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:text="삭제" />
     </LinearLayout>
 </LinearLayout>

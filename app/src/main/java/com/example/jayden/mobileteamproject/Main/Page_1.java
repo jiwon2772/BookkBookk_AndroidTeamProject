@@ -1,5 +1,6 @@
 package com.example.jayden.mobileteamproject.Main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import com.androidquery.callback.AjaxStatus;
 import com.androidquery.util.XmlDom;
 import com.example.jayden.mobileteamproject.R;
 import com.example.jayden.mobileteamproject.Search.BookAdaptor;
+import com.example.jayden.mobileteamproject.Search.BookInfo2;
 import com.example.jayden.mobileteamproject.Search.BookVO;
 
 import java.util.ArrayList;
@@ -70,7 +72,20 @@ public class Page_1 extends android.support.v4.app.Fragment implements View.OnCl
                 String description = mBookList.get(position).getDescription();
                 String img = mBookList.get(position).getImgUrl();
                 String isbn = mBookList.get(position).getISBN();
+                String publisher = mBookList.get(position).getPublisher();
 
+                Bundle mBundle = new Bundle();
+                mBundle.putString("author",author);
+                mBundle.putString("title",title);
+                mBundle.putString("description",description);
+                mBundle.putString("img",img);
+                mBundle.putString("ISBN",isbn);
+                mBundle.putString("publisher",publisher);
+
+                //Info2 띄우기
+                Intent intent = new Intent(getActivity(), BookInfo2.class);
+                intent.putExtras(mBundle);
+                startActivity(intent);
             }
 
         });
@@ -96,7 +111,7 @@ public class Page_1 extends android.support.v4.app.Fragment implements View.OnCl
                         //title 노드를 리턴
                         XmlDom titleNode = item.tag("title");
                         String strTitle = titleNode.text(); //텍스트노드의 텍스트를 가져옴.
-
+                        String strPublisher = item.tag("publisher").text();
                         String strAuthor = item.tag("author").text();
                         String strImg = item.tag("image").text();
 
@@ -105,6 +120,7 @@ public class Page_1 extends android.support.v4.app.Fragment implements View.OnCl
                         book.setAuthor(strAuthor);
                         book.setImgUrl(strImg);
                         book.setDescription(item.tag("description").text());
+                        book.setPublisher(strPublisher);
                         mBookList.add(book);
                     }
 

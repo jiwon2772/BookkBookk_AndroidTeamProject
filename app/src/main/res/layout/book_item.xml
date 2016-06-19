@@ -7,8 +7,10 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:background="@drawable/book_item_background"
-        android:padding="3dp">
+        android:background="@drawable/bookinfo2_search_result"
+        android:padding="3dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp">
 
         <RelativeLayout
             android:layout_width="65dp"
@@ -45,7 +47,8 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="Small Text"
-                    android:id="@+id/tvAuthor" />
+                    android:id="@+id/tvAuthor"
+                    android:textColor="#032335" />
             </LinearLayout>
 
             <TextView
@@ -55,7 +58,8 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Small Text"
                 android:id="@+id/tvDescription"
-                android:singleLine="true" android:ellipsize="end"/>
+                android:singleLine="true" android:ellipsize="end"
+                android:textColor="#032335" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -43,6 +42,7 @@ public class Writing extends AppCompatActivity implements View.OnClickListener {
     EditText text;
     CheckBox isHave;
     String img; // 등록한 책의 Url
+    String ISBN; //책의 고유번호
 
     Intent intent;
     phpInsert task_insert;
@@ -64,14 +64,13 @@ public class Writing extends AppCompatActivity implements View.OnClickListener {
         tvTitle = (TextView) findViewById(R.id.tvTitle);
         tvAuthor = (TextView) findViewById(R.id.tvAuthor);
         tvDescription = (TextView) findViewById(R.id.tvDescription);
-        delete = (Button) findViewById(R.id.delete);
         addBook = (Button) findViewById(R.id.addBook);
         isHave = (CheckBox)findViewById(R.id.chk);
         SearchBook = (LinearLayout)findViewById(R.id.SearchBook);
+        text = (EditText)findViewById(R.id.postText);
         img = null; //초기화
 
         SearchBook.setOnClickListener(this);
-        delete.setOnClickListener(this);
         addBook.setOnClickListener(this);
 
         // id값을 넘겨받기 위해 intent를 불러온다.
@@ -88,25 +87,18 @@ public class Writing extends AppCompatActivity implements View.OnClickListener {
             i.putExtras(myData);
             startActivityForResult(i, 2222);
         }
-        if (view.getId() == delete.getId()) {
-            selected_book.setVisibility(View.INVISIBLE);
-        }
-        if (view.getId() == addBook.getId()) {
+        else if (view.getId() == addBook.getId()) {
             if(img == null) {
                 Toast.makeText(Writing.this,"책을 선택해 주셔야 합니다.",Toast.LENGTH_SHORT).show();
                 return;
             }
             String txt = text.getText().toString();
-            try {
-                txt = URLEncoder.encode(new String(txt.getBytes("UTF-8")));
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
+
             int state = 0;
             if(isHave.isChecked() == true)
                 state = 1;
             task_insert = new phpInsert();
-            task_insert.execute("http://jiwon2772.16mb.com/addPost.php?userId=" + intent.getLongExtra("id", 0) + "&bookURL=" +
+            task_insert.execute("http://jiwon2772.16mb.com/addPost.php?userId=" + intent.getLongExtra("id", 0) + "&ISBN=" + ISBN + "&bookURL=" +
                     img + "&text=" + txt + "&isHave=" + state);
             Writing.this.finish();
 
@@ -122,6 +114,9 @@ public class Writing extends AppCompatActivity implements View.OnClickListener {
                 String description = myResults.getString("description");
                 img = myResults.getString("img");
                 String title = myResults.getString("title");
+                ISBN = myResults.getString("ISBN");
+                ISBN = ISBN.substring(0,10);
+
 
                 // 책 등록 상태를 표시
                 isAdded = true;
@@ -185,5 +180,4 @@ public class Writing extends AppCompatActivity implements View.OnClickListener {
 
         }
     }
-
 }

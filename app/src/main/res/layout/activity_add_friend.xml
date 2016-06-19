@@ -3,13 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    tools:context="com.example.jayden.mobileteamproject.Friend.AddFriend"
     android:background="#032335">
 
-    <ListView
-        android:id="@+id/postlist"
-        android:fadingEdge = "none"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 </LinearLayout>
-

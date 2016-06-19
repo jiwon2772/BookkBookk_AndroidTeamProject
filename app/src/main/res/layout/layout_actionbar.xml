@@ -2,30 +2,55 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="60dp">
+    android:layout_height="40dp">
     <ImageButton
         android:id="@+id/action_slide"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="2dp"
-        android:background="@drawable/menu1"/>
+        android:background="@drawable/bookk_topbar_button_menu"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="2dp" />
 
-    <ImageButton
-        android:id="@+id/action_book"
-        android:layout_width="60dp"
-        android:layout_height="30dp"
-        android:layout_centerInParent="true"
-        android:layout_margin="8dp"
-        android:background="@drawable/iconbook"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_toRightOf="@+id/action_slide">
 
-    <ImageButton
-        android:id="@+id/action_people"
-        android:layout_width="60dp"
-        android:layout_height="30dp"
-        android:layout_toRightOf="@id/action_book"
-        android:layout_margin="8dp"
-        android:background="@drawable/iconpeople"/>
+        <ImageButton
+            android:id="@+id/action_book"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/bookk_topbar_button_book"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_toLeftOf="@+id/action_write">
+
+        <ImageButton
+            android:id="@+id/action_people"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@id/action_book"
+            android:background="@drawable/bookk_topbar_button_people"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp" />
+    </LinearLayout>
 
     <ImageButton
         android:id="@+id/action_write"
@@ -33,7 +58,9 @@
         android:layout_height="30dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
+        android:background="@drawable/bookk_topbar_button_write"
         android:layout_marginRight="2dp"
-        android:background="@drawable/write"/>
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp" />
 
 </RelativeLayout>

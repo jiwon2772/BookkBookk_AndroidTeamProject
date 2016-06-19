@@ -1,11 +1,16 @@
 package com.example.jayden.mobileteamproject.Kakao;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 
 import com.example.jayden.mobileteamproject.Main.MainActivity;
+import com.example.jayden.mobileteamproject.R;
 import com.kakao.auth.ErrorCode;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
@@ -31,6 +36,8 @@ public class KakaoSignupActivity extends AppCompatActivity {
 
     Intent passIntent;
     phpInsert task_insert;
+
+    boolean isFirst  = true; //It Check this is first login.
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -71,11 +78,11 @@ public class KakaoSignupActivity extends AppCompatActivity {
                 long id = userProfile.getId();
                 String nickname = userProfile.getNickname();
                 String profileUrl = userProfile.getProfileImagePath();
-                try {
-                    nickname = URLEncoder.encode(nickname, "UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    //nickname = URLEncoder.encode(nickname, "UTF-8");
+//                } catch (UnsupportedEncodingException e) {
+//                    e.printStackTrace();
+//                }
 
                 //id가 어플 DB에 들어와있는지 확인하고 프로필과 닉네임 업데이트를 해줌
                 task_insert = new phpInsert();
@@ -84,8 +91,28 @@ public class KakaoSignupActivity extends AppCompatActivity {
 
                 passIntent.putExtra("id",id);
                 passIntent.putExtra("nick", nickname);
-                passIntent.putExtra("profileImage",profileUrl);
-                redirectMainActivity(); // 로그인 성공시 MainActivity로
+                passIntent.putExtra("profileImage", profileUrl);
+
+                //get Kakao ID if this is first login with this user.
+                if(true) {
+                    LayoutInflater inflater = getLayoutInflater();
+                    AlertDialog alertDialog = new AlertDialog.Builder(KakaoSignupActivity.this,AlertDialog.THEME_DEVICE_DEFAULT_DARK)
+                            .setTitle("Kakao ID")
+                            .setView(inflater.inflate(R.layout.dialog_kakao, null))
+                            .setPositiveButton("다음", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    redirectMainActivity(); // 로그인 성공시 MainActivity로
+                                }
+                            })
+                            .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                }
+                            })
+                            .setCancelable(false)
+                            .create();
+                    alertDialog.show();
+                }
+                //redirectMainActivity(); // 로그인 성공시 MainActivity로
             }
         });
     }

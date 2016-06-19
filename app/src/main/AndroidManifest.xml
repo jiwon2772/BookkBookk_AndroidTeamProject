@@ -11,22 +11,33 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".Main.LoginActivity"
-            android:theme="@style/NoAction"></activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/NoAction" />
         <activity
             android:name=".Kakao.KakaoSignupActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoAction" />
-        <activity android:name=".Kakao.KakaoSDKAdapter" />
-        <activity android:name=".Kakao.GlobalApplication" />
-        <activity android:name=".Posting.Writing" />
-        <activity android:name=".Search.BookSearch" />
+        <activity
+            android:name=".Kakao.KakaoSDKAdapter"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Kakao.GlobalApplication"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Posting.Writing"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoAction" />
+        <activity
+            android:name=".Search.BookSearch"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".BookShelf.BookShelfActivity"
-            android:theme="@style/AppTheme" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Main.SplashActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoAction">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,20 +45,40 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BookShelf.ImageActivity" />
+        <activity
+            android:name=".BookShelf.ImageActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
 
-        <activity android:name=".Main.MainActivity"></activity>
-        <activity android:name=".Friend.FriendList" />
-        <activity android:name=".Request.RequestList" />
-        <activity android:name=".Friend.popular_lib" />
-        <activity android:name=".Main.FragmentsTab" />
-        <activity android:name=".Search.BookInfo" />
-        <activity android:name=".Search.BookInfo2" />
-        <activity android:name=".Search.BookSearch2" />
+        <activity
+            android:name=".Main.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Friend.FriendList"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Request.RequestList"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Friend.popular_lib"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Friend.PeopleActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AlmostNoAction" />
+        <activity
+            android:name=".Search.BookInfo"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Search.BookInfo2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Search.BookSearch2"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Friend.AddFriend"></activity>
     </application>
 
 </manifest>
