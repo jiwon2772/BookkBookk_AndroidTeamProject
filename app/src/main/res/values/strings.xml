@@ -3,6 +3,7 @@
     <string name="action_write">Write</string>
     <string name="action_book">Book</string>
     <string name="action_people">People</string>
+    <string name="action_logout">Logout</string>
     <string name="open_drawer">Open drawer</string>
     <string name="close_drawer">Close drawer</string>
     <string name="title_section1">친구 목록</string>

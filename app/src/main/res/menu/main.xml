@@ -22,4 +22,11 @@
         android:showAsAction="always"
         android:title="@string/action_book" />
 
+    <item
+        android:id="@+id/action_logout"
+        android:icon="@drawable/write"
+        android:orderInCategory="10"
+        android:showAsAction="always"
+        android:title="@string/action_logout" />
+
 </menu>

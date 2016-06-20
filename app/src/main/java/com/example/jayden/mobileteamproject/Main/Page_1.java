@@ -114,8 +114,10 @@ public class Page_1 extends android.support.v4.app.Fragment implements View.OnCl
                         String strPublisher = item.tag("publisher").text();
                         String strAuthor = item.tag("author").text();
                         String strImg = item.tag("image").text();
+                        String strISBN = item.tag("isbn").text();
 
                         BookVO book = new BookVO();
+                        book.setISBN(strISBN);
                         book.setTitle(strTitle);
                         book.setAuthor(strAuthor);
                         book.setImgUrl(strImg);

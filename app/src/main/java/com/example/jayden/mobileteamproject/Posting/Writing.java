@@ -101,7 +101,6 @@ public class Writing extends AppCompatActivity implements View.OnClickListener {
             task_insert.execute("http://jiwon2772.16mb.com/addPost.php?userId=" + intent.getLongExtra("id", 0) + "&ISBN=" + ISBN + "&bookURL=" +
                     img + "&text=" + txt + "&isHave=" + state);
             Writing.this.finish();
-
         }
     }
 

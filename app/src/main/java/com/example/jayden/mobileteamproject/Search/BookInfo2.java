@@ -56,9 +56,6 @@ public class BookInfo2 extends Activity {
         imageView = (ImageView)findViewById(R.id.imageView);
         fListView = (ListView)findViewById(R.id.fListView);
         lists = new ArrayList<Friend>();
-        adapter = new FriendAdapter(this, lists);
-        fListView.setAdapter(adapter);
-
 
         receivedIntent = getIntent();
         myBundle = receivedIntent.getExtras();
@@ -67,6 +64,10 @@ public class BookInfo2 extends Activity {
         String description_ = myBundle.getString("description");
         String publisher_ = myBundle.getString("publisher");
         String img_ = myBundle.getString("img");
+        String ISBN_ = myBundle.getString("ISBN");
+        ISBN_ = ISBN_.substring(0,10);
+
+
         myBundle.putString("select", "false"); // 선택버튼 눌렀는지 판단. false(안누름)으로 초기화
 
         title.setText(Html.fromHtml(title_));
@@ -76,7 +77,7 @@ public class BookInfo2 extends Activity {
         aq.id(imageView).image(img_);
 
         phpDown task =  new phpDown();
-        task.execute("http://jiwon2772.16mb.com/mainActivity.php");
+        task.execute("http://jiwon2772.16mb.com/getUsersHaving.php?ISBN=" + ISBN_);
 
     }
     private class phpDown extends AsyncTask<String, Integer, String> {
@@ -118,6 +119,7 @@ public class BookInfo2 extends Activity {
             long userId;
             String nickname;
             String profile;
+            String date;
 
             try {
                 JSONObject root = new JSONObject(str);
@@ -131,13 +133,17 @@ public class BookInfo2 extends Activity {
                     userId = jo.getLong("id");
                     nickname = jo.getString("nick");
                     profile = jo.getString("profile");
+                    date = jo.getString("date");
 
-                    lists.add(new Friend(userId, profile, nickname));
+                    lists.add(new Friend(userId, profile, nickname,date));
 
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            adapter = new FriendAdapter(BookInfo2.this, lists);
+            adapter.notifyDataSetInvalidated();
+            fListView.setAdapter(adapter);
         }
 
     }

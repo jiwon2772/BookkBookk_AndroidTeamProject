@@ -39,7 +39,7 @@ public class Page_2 extends android.support.v4.app.Fragment {
     protected ArrayList<Post> lists;
     PostAdapter adapter;
     ListView listView;
-    phpDown task;
+    public phpDown task;
     Bitmap[][] bitmapList;
     int length;
     int current= 0;
@@ -63,7 +63,6 @@ public class Page_2 extends android.support.v4.app.Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LinearLayout linearLayout = (LinearLayout) inflater.inflate(R.layout.activity_main, container, false);
@@ -75,7 +74,7 @@ public class Page_2 extends android.support.v4.app.Fragment {
         int reWidth=(int)(getActivity().getWindowManager().getDefaultDisplay().getWidth());
         int reHeight=(int)(getActivity().getWindowManager().getDefaultDisplay().getHeight());
 
-                task = new phpDown();
+        task = new phpDown();
         task.execute("http://jiwon2772.16mb.com/mainActivity.php");//도메인을 실행
 
         return linearLayout;

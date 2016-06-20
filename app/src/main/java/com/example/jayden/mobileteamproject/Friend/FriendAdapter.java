@@ -68,16 +68,20 @@ public class FriendAdapter extends BaseAdapter {
 
         if (convertView == null) {
             int res = 0;
-            res = R.layout.friend;
+            res = R.layout.user_having_book;
             convertView = mInflater.inflate(res, parent, false);
         }
 
-        ImageView pro_img = (ImageView) convertView.findViewById(R.id.kt_user_profile);
-        TextView pro_id = (TextView) convertView.findViewById(R.id.kt_user_id);
+        ImageView pro_img = (ImageView) convertView.findViewById(R.id.ivImg);
+        TextView pro_nick = (TextView) convertView.findViewById(R.id.tvTitle);
+        TextView date = (TextView)convertView.findViewById(R.id.tvDescription);
 
         ImageLoaderTask task = new ImageLoaderTask(pro_img,arr.get(position).prof_url);
         task.execute();
-        pro_id.setText("" + arr.get(position).userId);
+        pro_nick.setText("" + arr.get(position).nick);
+        date.setText("" + arr.get(position).date);
+
+
 
         return convertView;
     }

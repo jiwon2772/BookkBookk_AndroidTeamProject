@@ -1,11 +1,13 @@
 package com.example.jayden.mobileteamproject.Main;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.provider.Contacts;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -35,7 +37,7 @@ import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
 public class MainActivity extends ActionBarActivity {
 
-    private String[] navItems = {"HOME", "BOOK", "PEOPLE", "MAKER"};
+    private String[] navItems = {"BOOK", "PEOPLE", "DEVELOPER","LOGOUT"};
     private ListView lvNavList;
     private FrameLayout flContainer;
 
@@ -51,7 +53,7 @@ public class MainActivity extends ActionBarActivity {
     Fragment cur_fragment = new Fragment();
 
     ActionBar thisActionBar;
-
+    FragmentPagerAdapter pageAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +83,8 @@ public class MainActivity extends ActionBarActivity {
         };
         dlDrawer.setDrawerListener(dtToggle);
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setAdapter(new adapter(getSupportFragmentManager()));
+        pageAdapter = new adapter(getSupportFragmentManager());
+        viewPager.setAdapter(pageAdapter);
         viewPager.setCurrentItem(1);
 
         userInfo = getIntent();
@@ -227,7 +230,6 @@ public class MainActivity extends ActionBarActivity {
         });
 
     }
-
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -245,27 +247,25 @@ public class MainActivity extends ActionBarActivity {
         dtToggle.onConfigurationChanged(newConfig);
     }
 
-
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
-
         @Override
         public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
             switch (position) {
                 case 0:
-                    final Intent intent = new Intent(MainActivity.this, RequestList.class);
+                    Intent intent = new Intent(MainActivity.this, BookShelfActivity.class);
                     startActivity(intent);
                     break;
                 case 1:
-                    flContainer.setBackgroundColor(Color.parseColor("#5F9EA0"));
+                    Intent intent2 = new Intent(MainActivity.this, BookShelfActivity.class);
+                    startActivity(intent2);
                     break;
                 case 2:
-                    flContainer.setBackgroundColor(Color.parseColor("#556B2F"));
+                    Intent intent3 = new Intent(MainActivity.this, BookShelfActivity.class);
+                    startActivity(intent3);
                     break;
                 case 3:
-                    flContainer.setBackgroundColor(Color.parseColor("#FF8C00"));
                     break;
                 case 4:
-                    flContainer.setBackgroundColor(Color.parseColor("#DAA520"));
                     break;
             }
             dlDrawer.closeDrawer(lvNavList);
