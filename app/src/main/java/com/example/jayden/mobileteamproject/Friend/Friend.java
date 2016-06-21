@@ -9,6 +9,7 @@ public class Friend {
     public String nick;
     public String date;
     public String post;
+    public String kakao;
 
     public Friend(String p_img, String p_nick)
     {
@@ -35,6 +36,15 @@ public class Friend {
         nick = p_nick;
         date = dat;
         post = pst;
+    }
+    public Friend(long p_id,String p_img,String p_nick,String dat,String pst, String ka)
+    {
+        userId = p_id;
+        prof_url = p_img;
+        nick = p_nick;
+        date = dat;
+        post = pst;
+        kakao = ka;
     }
 }
 

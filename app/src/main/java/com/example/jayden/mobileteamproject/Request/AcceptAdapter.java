@@ -5,6 +5,8 @@ package com.example.jayden.mobileteamproject.Request;
  */
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,18 +19,12 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.jayden.mobileteamproject.Friend.Friend;
-import com.example.jayden.mobileteamproject.Main.USERINFO;
 import com.example.jayden.mobileteamproject.R;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class AcceptAdapter extends BaseAdapter {
@@ -84,6 +80,16 @@ public class AcceptAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 //상대 카카오톡 아이디 확인
+                String servName= Context.NOTIFICATION_SERVICE;
+                NotificationManager notificationManager= (NotificationManager)parent.getContext().getSystemService(servName);
+
+                String subject = arr.get(position).kakao;
+                Notification noti = new Notification.Builder(parent.getContext())
+                        .setContentTitle("부끄부끄 : KAKAO ID 알림")
+                        .setContentText(subject)
+                        .setSmallIcon(R.drawable.bookk_icon2)
+                        .build();
+                notificationManager.notify(12345, noti);
             }
         });
 

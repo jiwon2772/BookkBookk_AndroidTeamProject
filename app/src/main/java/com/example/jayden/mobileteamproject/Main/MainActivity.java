@@ -102,7 +102,7 @@ public class MainActivity extends ActionBarActivity {
         //fragment 초기화
         page1 = new Page_1();
         page2 = new Page_2();
-        //page3 = new Page_3();
+        page3 = new Page_3();
         page1.setArguments(MyInfo);
     }
 

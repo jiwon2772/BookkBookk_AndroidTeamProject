@@ -1,9 +1,15 @@
 package com.example.jayden.mobileteamproject.Friend;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.widget.DrawerLayout;
@@ -20,10 +26,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.jayden.mobileteamproject.Main.USERINFO;
 import com.example.jayden.mobileteamproject.R;
+import com.example.jayden.mobileteamproject.Request.AcceptAdapter;
+import com.example.jayden.mobileteamproject.Request.RequestAdapter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 /**
@@ -217,15 +231,17 @@ public class PeopleActivity extends ActionBarActivity implements ActionBar.TabLi
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.f_fragment, container, false);
-            TextView tv = (TextView) rootView.findViewById(R.id.tabFri);
-            tv.setText("친구 목록 페이지");
             return rootView;
         }
     }
 
 
     public static class SectionsFragment2 extends Fragment {
-
+        int length;
+        ArrayList<Friend> lists;
+        ListView listview;
+        AcceptAdapter adapter;
+        phpDown task;
         public SectionsFragment2() {
 
         }
@@ -242,9 +258,84 @@ public class PeopleActivity extends ActionBarActivity implements ActionBar.TabLi
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.r_fragment, container, false);
-            TextView tv = (TextView) rootView.findViewById(R.id.tabReq);
-            tv.setText("요청 목록 페이지");
+            listview = (ListView)rootView.findViewById(R.id.finish);
+            lists = new ArrayList<Friend>();
+
+            task =  new phpDown();
+            task.execute("http://jiwon2772.16mb.com/getAccept.php?userId=" + USERINFO.id);
+
             return rootView;
+        }
+        private class phpDown extends AsyncTask<String, Integer, String> {
+
+            @Override
+            protected String doInBackground(String... urls) {
+                StringBuilder jsonHtml = new StringBuilder();
+                try {
+                    // 연결 url 설정
+                    URL url = new URL(urls[0]);
+                    // 커넥션 객체 생성
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    // 연결되었으면.
+                    if (conn != null) {
+                        conn.setConnectTimeout(10000);
+                        conn.setUseCaches(false);
+                        // 연결되었음 코드가 리턴되면.
+                        if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "EUC-KR"));
+                            for (; ; ) {
+                                // 웹상에 보여지는 텍스트를 라인단위로 읽어 저장.
+                                String line = br.readLine();
+                                if (line == null) break;
+                                // 저장된 텍스트 라인을 jsonHtml에 붙여넣음
+                                jsonHtml.append(line + "\n");
+                            }
+                            br.close();
+                        }
+                        conn.disconnect();
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                return jsonHtml.toString();
+
+            }
+
+            protected void onPostExecute(String str) {
+                long userId;
+                String nickname;
+                String profile;
+                String date;
+                String postId;
+                String kakao;
+
+                try {
+                    JSONObject root = new JSONObject(str);
+                    JSONArray ja = root.getJSONArray("results"); //get the JSONArray which I made in the php file. the name of JSONArray is "results"
+
+                    length = ja.length();
+
+                    for (int i = 0; i < ja.length(); i++) {
+                        // web에서 가져온 정보를 안드로이드 객체에 넣어준다.
+                        JSONObject jo = (JSONObject) ja.get(i);
+                        userId = jo.getLong("destId");
+                        nickname = jo.getString("nickname");
+                        profile = jo.getString("profileURL");
+                        date = jo.getString("date");
+                        postId = jo.getString("postId");
+                        kakao = jo.getString("kakaoId");
+
+                        lists.add(new Friend(userId, profile, nickname, date, postId, kakao));
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                adapter = new AcceptAdapter(getActivity(), lists);
+                listview.setAdapter(adapter);
+                adapter.notifyDataSetInvalidated();
+            }
+
         }
     }
 }
