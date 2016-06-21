@@ -61,7 +61,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:text="요청"
+            android:text="승인"
             android:id="@+id/request"
             android:background="@drawable/bookinfo2_content"
             android:layout_gravity="center_vertical"

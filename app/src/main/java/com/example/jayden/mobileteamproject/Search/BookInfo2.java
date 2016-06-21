@@ -7,16 +7,18 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidquery.AQuery;
-import com.example.jayden.mobileteamproject.BookShelf.BookShelfActivity;
-import com.example.jayden.mobileteamproject.BookShelf.ImageGridAdapter;
 import com.example.jayden.mobileteamproject.Friend.Friend;
 import com.example.jayden.mobileteamproject.Friend.FriendAdapter;
-import com.example.jayden.mobileteamproject.Posting.Post;
+import com.example.jayden.mobileteamproject.Main.USERINFO;
 import com.example.jayden.mobileteamproject.R;
 
 import org.json.JSONArray;
@@ -44,6 +46,18 @@ public class BookInfo2 extends Activity {
     FriendAdapter adapter;
     int length;
 
+    // 현재 눌러진 책의 대한 정보들을 가지고 있는 변수
+    String title_;
+    String author_;
+    String description_;
+    String publisher_;
+    String img_;
+    String ISBN_;
+    // 현재 로그인 중인 사용자의 정보를 가지고 있습니다.
+    long userId;
+    String nick;
+    String profile;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.book_info2);
@@ -57,16 +71,21 @@ public class BookInfo2 extends Activity {
         fListView = (ListView)findViewById(R.id.fListView);
         lists = new ArrayList<Friend>();
 
+
         receivedIntent = getIntent();
         myBundle = receivedIntent.getExtras();
-        String title_ = myBundle.getString("title");
-        String author_ = myBundle.getString("author");
-        String description_ = myBundle.getString("description");
-        String publisher_ = myBundle.getString("publisher");
-        String img_ = myBundle.getString("img");
-        String ISBN_ = myBundle.getString("ISBN");
-        ISBN_ = ISBN_.substring(0,10);
+        title_ = myBundle.getString("title");
+        author_ = myBundle.getString("author");
+        description_ = myBundle.getString("description");
+        publisher_ = myBundle.getString("publisher");
+        img_ = myBundle.getString("img");
+        ISBN_ = myBundle.getString("ISBN");
+        ISBN_ = ISBN_.substring(0, 10);
 
+        //현재 접속중인 사용자의 정보를 저장
+        userId = myBundle.getLong("id");
+        nick = myBundle.getString("nick");
+        profile = myBundle.getString("profile");
 
         myBundle.putString("select", "false"); // 선택버튼 눌렀는지 판단. false(안누름)으로 초기화
 
@@ -78,6 +97,7 @@ public class BookInfo2 extends Activity {
 
         phpDown task =  new phpDown();
         task.execute("http://jiwon2772.16mb.com/getUsersHaving.php?ISBN=" + ISBN_);
+
 
     }
     private class phpDown extends AsyncTask<String, Integer, String> {
@@ -120,6 +140,7 @@ public class BookInfo2 extends Activity {
             String nickname;
             String profile;
             String date;
+            String postId;
 
             try {
                 JSONObject root = new JSONObject(str);
@@ -134,8 +155,9 @@ public class BookInfo2 extends Activity {
                     nickname = jo.getString("nick");
                     profile = jo.getString("profile");
                     date = jo.getString("date");
+                    postId = jo.getString("postId");
 
-                    lists.add(new Friend(userId, profile, nickname,date));
+                    lists.add(new Friend(userId, profile, nickname,date,postId));
 
                 }
             } catch (JSONException e) {

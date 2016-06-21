@@ -82,6 +82,11 @@ public class Page_1 extends android.support.v4.app.Fragment implements View.OnCl
                 mBundle.putString("ISBN",isbn);
                 mBundle.putString("publisher",publisher);
 
+                Bundle myinfo = getArguments();
+                mBundle.putLong("id",myinfo.getLong("id",0));
+                mBundle.putString("nick",myinfo.getString("nick"));
+                mBundle.putString("profile",myinfo.getString("profile"));
+
                 //Info2 띄우기
                 Intent intent = new Intent(getActivity(), BookInfo2.class);
                 intent.putExtras(mBundle);

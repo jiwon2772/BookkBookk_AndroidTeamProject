@@ -1,9 +1,11 @@
 package com.example.jayden.mobileteamproject.Request;
 
+/**
+ * Created by Jayden on 2016-06-22.
+ */
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -20,8 +22,6 @@ import android.widget.Toast;
 import com.example.jayden.mobileteamproject.Friend.Friend;
 import com.example.jayden.mobileteamproject.Main.USERINFO;
 import com.example.jayden.mobileteamproject.R;
-import com.kakao.usermgmt.UserManagement;
-import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,12 +31,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class RequestAdapter extends BaseAdapter {
+public class AcceptAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private Activity m_activity;
     private ArrayList<Friend> arr;
 
-    public RequestAdapter(Activity act, ArrayList<Friend> arr_list) {
+    public AcceptAdapter(Activity act, ArrayList<Friend> arr_list) {
         this.m_activity = act;
         arr = arr_list;
         mInflater = (LayoutInflater) m_activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -65,7 +65,7 @@ public class RequestAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, final ViewGroup parent) {
         if (convertView == null) {
             int res = 0;
-            res = R.layout.user_request_item;
+            res = R.layout.finish_list;
             convertView = mInflater.inflate(res, parent, false);
         }
 
@@ -79,14 +79,11 @@ public class RequestAdapter extends BaseAdapter {
         pro_nick.setText("" + arr.get(position).nick);
         date.setText("" + arr.get(position).date);
 
-        Button btnRequest = (Button) convertView.findViewById(R.id.request);
+        Button btnRequest = (Button) convertView.findViewById(R.id.checkKAKAO);
         btnRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                phpInsert task = new phpInsert();
-                task.execute("http://jiwon2772.16mb.com/addAccept.php?userId=" + USERINFO.id + "&destId=" + arr.get(position).userId + "&postId=" +
-                        arr.get(position).post);
-                Toast.makeText(parent.getContext(), "요청을 승인했습니다.", Toast.LENGTH_SHORT).show();
+                //상대 카카오톡 아이디 확인
             }
         });
 
@@ -118,54 +115,6 @@ public class RequestAdapter extends BaseAdapter {
         @Override
         protected void onPostExecute(Bitmap bitmap) {
             updateProfile(profileView, bitmap);
-        }
-    }
-
-    private class phpInsert extends AsyncTask<String, Integer, String> {
-
-
-        @Override
-        protected String doInBackground(String... urls) {
-            StringBuilder resultText = new StringBuilder();
-            try {
-                // 연결 url 설정
-                URL url = new URL(urls[0]);
-                // 커넥션 객체 생성
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                // 연결되었으면.
-                if (conn != null) {
-                    conn.setConnectTimeout(10000);
-                    conn.setUseCaches(false);
-                    // 연결되었음 코드가 리턴되면.
-                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-                        for (; ; ) {
-                            // 웹상에 보여지는 텍스트를 라인단위로 읽어 저장.
-                            String line = br.readLine();
-                            if (line == null) break;
-                            // 저장된 텍스트 라인을 jsonHtml에 붙여넣음
-                            resultText.append(line);
-                        }
-                        br.close();
-                    }
-                    conn.disconnect();
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-            return resultText.toString();
-
-
-        }
-
-        protected void onPostExecute(String str) {
-            if (str.equals("1")) {
-                //Toast.makeText(getApplicationContext(),"DB Insert Complete.",Toast.LENGTH_LONG).show();
-            } else {
-                //Toast.makeText(getApplicationContext(),"DB Insert Failed.",Toast.LENGTH_LONG).show();
-            }
-
-
         }
     }
 

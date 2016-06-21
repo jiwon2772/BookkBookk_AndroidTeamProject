@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 
 import com.example.jayden.mobileteamproject.Main.MainActivity;
+import com.example.jayden.mobileteamproject.Main.USERINFO;
 import com.example.jayden.mobileteamproject.R;
 import com.kakao.auth.ErrorCode;
 import com.kakao.network.ErrorResult;
@@ -92,6 +93,10 @@ public class KakaoSignupActivity extends AppCompatActivity {
                 passIntent.putExtra("id",id);
                 passIntent.putExtra("nick", nickname);
                 passIntent.putExtra("profileImage", profileUrl);
+
+                USERINFO.id = id;
+                USERINFO.nick = nickname;
+                USERINFO.profile = profileUrl;
 
                 //get Kakao ID if this is first login with this user.
                 if(true) {

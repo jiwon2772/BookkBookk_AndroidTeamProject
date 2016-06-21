@@ -44,13 +44,16 @@ public class MainActivity extends ActionBarActivity {
     private DrawerLayout dlDrawer;
     private ActionBarDrawerToggle dtToggle;
 
-    int MAX_PAGE = 3;
+    Bundle MyInfo;
+
+    int MAX_PAGE = 2;
     long userId; //User ID
     String nick;
     String profile;
 
     Intent userInfo;
     Fragment cur_fragment = new Fragment();
+    Fragment page1, page2, page3;
 
     ActionBar thisActionBar;
     FragmentPagerAdapter pageAdapter;
@@ -91,6 +94,16 @@ public class MainActivity extends ActionBarActivity {
         userId = userInfo.getLongExtra("id", 0);
         nick = userInfo.getStringExtra("nick");
         profile = userInfo.getStringExtra("profileImage");
+        MyInfo = new Bundle();
+        MyInfo.putLong("id", userId);
+        MyInfo.putString("nick", nick);
+        MyInfo.putString("profile",profile);
+
+        //fragment 초기화
+        page1 = new Page_1();
+        page2 = new Page_2();
+        //page3 = new Page_3();
+        page1.setArguments(MyInfo);
     }
 
     private class adapter extends FragmentPagerAdapter {
@@ -110,14 +123,14 @@ public class MainActivity extends ActionBarActivity {
                 return null;
             switch (position) {
                 case 0:
-                    cur_fragment = new Page_1();
+                    cur_fragment = page1;
                     break;
                 case 1:
-                    cur_fragment = new Page_2();
+                    cur_fragment = page2;
                     break;
-                case 2:
-                    cur_fragment = new Page_3();
-                    break;
+//                case 2:
+//                    cur_fragment = page3;
+//                    break;
             }
             return cur_fragment;
         }

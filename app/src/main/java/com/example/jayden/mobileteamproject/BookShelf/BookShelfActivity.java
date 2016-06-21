@@ -115,6 +115,7 @@ public class BookShelfActivity extends ActionBarActivity {
         }
 
         protected void onPostExecute(String str) {
+            String postId;
             long userId;
             String nickname;
             String profile;
@@ -131,6 +132,7 @@ public class BookShelfActivity extends ActionBarActivity {
                 for (int i = 0; i < ja.length(); i++) {
                     // web에서 가져온 정보를 안드로이드 객체에 넣어준다.
                     JSONObject jo = (JSONObject)ja.get(i);
+                    postId = jo.getString("postId");
                     userId = jo.getLong("id");
                     nickname = jo.getString("nick");
                     profile = jo.getString("profile");
@@ -138,7 +140,7 @@ public class BookShelfActivity extends ActionBarActivity {
                     text = jo.getString("text");
                     date = jo.getString("date");
 
-                    shelfLists.add(new Post(userId, bookUrl, profile, nickname, date, text));
+                    shelfLists.add(new Post(postId, userId, bookUrl, profile, nickname, date, text));
 
                 }
             } catch (JSONException e) {
