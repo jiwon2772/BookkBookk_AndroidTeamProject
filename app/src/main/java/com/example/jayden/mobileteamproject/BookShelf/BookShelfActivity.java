@@ -1,12 +1,17 @@
 package com.example.jayden.mobileteamproject.BookShelf;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -31,6 +36,10 @@ import java.util.ArrayList;
  */
 public class BookShelfActivity extends ActionBarActivity {
 
+    static final int PROGRESS_DIALOG = 0;
+    ProgressThread progressThread;
+    ProgressDialog progressDialog;
+
     protected ArrayList<Post> shelfLists;
     int length;
     phpDown task;
@@ -47,6 +56,9 @@ public class BookShelfActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bookshelf);
+
+        //프로그래스바 초기 설정
+        showDialog(PROGRESS_DIALOG);
 
         // 액션바 셋팅
         getSupportActionBar().setDisplayShowCustomEnabled(true);
@@ -151,6 +163,68 @@ public class BookShelfActivity extends ActionBarActivity {
             gridViewImages.setAdapter(imageGridAdapter);
         }
 
+    }
+    //프로그래스바 만들기
+    protected Dialog onCreateDialog(int id) {
+        switch(id) {
+            case PROGRESS_DIALOG:
+                progressDialog = ProgressDialog.show(BookShelfActivity.this, "", "Loading. Please wait...", true);
+                return progressDialog;
+            default:
+                return null;
+        }
+    }
+    @Override
+    protected void onPrepareDialog(int id, Dialog dialog) {
+        final Handler handler = new Handler() {
+            public void handleMessage(Message msg) {
+                int total = msg.arg1;
+                progressDialog.setProgress(total);
+                if (total >= 40) {
+                    dismissDialog(PROGRESS_DIALOG);
+                    progressThread.setState(ProgressThread.STATE_DONE);
+                }
+            }
+        };
+        switch (id) {
+            case PROGRESS_DIALOG:
+                progressDialog.setProgress(0);
+                progressThread = new ProgressThread(handler);
+                progressThread.start();
+        }
+    }
+    /** Nested class that performs progress calculations (counting) */
+    private class ProgressThread extends Thread {
+        Handler mHandler;
+        final static int STATE_DONE = 0;
+        final static int STATE_RUNNING = 1;
+        int mState;
+        int total;
+
+        ProgressThread(Handler h) {
+            mHandler = h;
+        }
+
+        public void run() {
+            mState = STATE_RUNNING;
+            total = 0;
+            while (mState == STATE_RUNNING) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    Log.e("ERROR", "Thread Interrupted");
+                }
+                Message msg = mHandler.obtainMessage();
+                msg.arg1 = total;
+                mHandler.sendMessage(msg);
+                total++;
+            }
+        }
+        /* sets the current state for the thread,
+            * used to stop the thread */
+        public void setState(int state) {
+            mState = state;
+        }
     }
 }
 

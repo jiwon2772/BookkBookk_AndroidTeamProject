@@ -99,7 +99,7 @@ public class Writing extends AppCompatActivity implements View.OnClickListener {
                 state = 1;
             task_insert = new phpInsert();
             task_insert.execute("http://jiwon2772.16mb.com/addPost.php?userId=" + intent.getLongExtra("id", 0) + "&ISBN=" + ISBN + "&bookURL=" +
-                    img + "&text=" + txt + "&isHave=" + state);
+                    img + "&text=" + txt + "&isHave=" + 1);
             Writing.this.finish();
         }
     }

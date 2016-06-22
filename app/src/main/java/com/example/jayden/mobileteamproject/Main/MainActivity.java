@@ -2,11 +2,15 @@ package com.example.jayden.mobileteamproject.Main;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.Contacts;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -17,6 +21,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -36,6 +41,10 @@ import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    static final int PROGRESS_DIALOG = 0;
+    ProgressThread progressThread;
+    ProgressDialog progressDialog;
 
     private String[] navItems = {"BOOK", "PEOPLE", "DEVELOPER","LOGOUT"};
     private ListView lvNavList;
@@ -61,6 +70,9 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+        //프로그래스바 초기 설정
+        showDialog(PROGRESS_DIALOG);
 
         thisActionBar = getSupportActionBar();
 
@@ -171,7 +183,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //onClickLogout();
+        onClickLogout();
     }
 
     private void onClickLogout() {
@@ -188,6 +200,35 @@ public class MainActivity extends ActionBarActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
         finish();
+    }
+    //프로그래스바 만들기
+    protected Dialog onCreateDialog(int id) {
+        switch(id) {
+            case PROGRESS_DIALOG:
+                progressDialog = ProgressDialog.show(MainActivity.this, "", "Loading. Please wait...", true);
+                return progressDialog;
+            default:
+                return null;
+        }
+    }
+    @Override
+    protected void onPrepareDialog(int id, Dialog dialog) {
+        final Handler handler = new Handler() {
+            public void handleMessage(Message msg) {
+                int total = msg.arg1;
+                progressDialog.setProgress(total);
+                if (total >= 40) {
+                    dismissDialog(PROGRESS_DIALOG);
+                    progressThread.setState(ProgressThread.STATE_DONE);
+                }
+            }
+        };
+        switch (id) {
+            case PROGRESS_DIALOG:
+                progressDialog.setProgress(0);
+                progressThread = new ProgressThread(handler);
+                progressThread.start();
+        }
     }
 
     private void setCustomActionbar() {
@@ -284,7 +325,39 @@ public class MainActivity extends ActionBarActivity {
             dlDrawer.closeDrawer(lvNavList);
         }
     }
+    /** Nested class that performs progress calculations (counting) */
+    private class ProgressThread extends Thread {
+        Handler mHandler;
+        final static int STATE_DONE = 0;
+        final static int STATE_RUNNING = 1;
+        int mState;
+        int total;
 
+        ProgressThread(Handler h) {
+            mHandler = h;
+        }
+
+        public void run() {
+            mState = STATE_RUNNING;
+            total = 0;
+            while (mState == STATE_RUNNING) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    Log.e("ERROR", "Thread Interrupted");
+                }
+                Message msg = mHandler.obtainMessage();
+                msg.arg1 = total;
+                mHandler.sendMessage(msg);
+                total++;
+            }
+        }
+        /* sets the current state for the thread,
+            * used to stop the thread */
+        public void setState(int state) {
+            mState = state;
+        }
+    }
 }
 
 
